@@ -1,6 +1,7 @@
-import {CogIcon} from '@sanity/icons'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 import pluralize from 'pluralize-esm'
+import { Browser, AlignTopSimple, AlignBottomSimple, GlobeHemisphereWest } from "@phosphor-icons/react"
+
 
 /**
  * Structure builder is useful whenever you want to control how documents are grouped and
@@ -8,12 +9,92 @@ import pluralize from 'pluralize-esm'
  * Learn more: https://www.sanity.io/docs/structure-builder-introduction
  */
 
-const DISABLED_TYPES = ['settings', 'assist.instruction.context']
+const DISABLED_TYPES = ['settings', 'site', 'homepage', 'online', 'offline', 'headerSettings', 'footerSettings', 'assist.instruction.context']
 
 export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
     .title('Website Content')
     .items([
+
+      S.listItem()
+              .title("Site Settings")
+              .id("site")
+              .icon(GlobeHemisphereWest)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("site")
+                  .documentId("site")
+              ),
+      S.listItem()
+              .title("Header")
+              .id("headerSettings")
+              .icon(AlignTopSimple)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("headerSettings")
+                  .documentId("headerSettings")
+              ),
+
+            S.listItem()
+              .title("Footer")
+              .id("footerSettings")
+              .icon(AlignBottomSimple)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("footerSettings")
+                  .documentId("footerSettings")
+              ),
+
+            S.listItem()
+              .title("Homepage")
+              .id("homepage")
+              .icon(Browser)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("homepage")
+                  .documentId("homepage")
+              ),
+
+            S.listItem()
+              .title("Online")
+              .id("online")
+              .icon(Browser)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("online")
+                  .documentId("online")
+              ),
+
+
+            S.listItem()
+              .title("Offline")
+              .id("offline")
+              .icon(Browser)
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("offline")
+                  .documentId("offline")
+              ),
+
+
       ...S.documentTypeListItems()
         // Remove the "assist.instruction.context" and "settings" content  from the list of content types
         .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId()))
@@ -24,6 +105,5 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       // Settings Singleton in order to view/edit the one particular document for Settings.  Learn more about Singletons: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
       S.listItem()
         .title('Site Settings')
-        .child(S.document().schemaType('settings').documentId('siteSettings'))
-        .icon(CogIcon),
+        .child(S.document().schemaType('site').documentId('site'))
     ])

@@ -16,6 +16,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
     "@sanity/assist": "^3.0.8",
     "@sanity/icons": "^3.5.0",
     "@sanity/vision": "^3.65.1",
