@@ -27,7 +27,7 @@ const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Clean Next.js + Sanity',
+  title: 'Sally-Ann Dale',
 
   projectId,
   dataset,
