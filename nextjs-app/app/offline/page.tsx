@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import { notFound } from "next/navigation";
 import OfflineProjects from "./components/offline-projects"
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { offlineQuery } from "@/sanity/lib/queries";
 
@@ -11,6 +12,11 @@ import { offlineQuery } from "@/sanity/lib/queries";
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
  */
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata
@@ -25,7 +31,7 @@ export async function generateMetadata(
   const ogImage = resolveOpenGraphImage(offline?.seo?.ogImage);
 
   return {
-    title: offline?.seo?.title,
+    title: offline?.seo?.title || offline?.title,
     description: offline?.seo?.description,
     openGraph: {
       images: ogImage ? [ogImage, ...previousImages] : previousImages,

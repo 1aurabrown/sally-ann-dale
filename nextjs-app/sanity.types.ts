@@ -522,24 +522,7 @@ export type SanityImageMetadata = {
 export type Seo = {
   _type: "seo";
   title: string;
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  description?: string;
   ogImage?: {
     asset?: {
       _ref: string;
@@ -766,24 +749,7 @@ export type SettingsQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -823,24 +789,7 @@ export type SettingsQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -882,24 +831,7 @@ export type SettingsQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -1020,24 +952,7 @@ export type SettingsQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -1069,24 +984,7 @@ export type SettingsQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -1110,7 +1008,7 @@ export type SettingsQueryResult = {
   gtmID: null;
 } | null;
 // Variable: layoutQuery
-// Query: {  "header": *[_id == "headerSettings"][0]{      ...,  leftNav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  },  rightNav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  },  logo  },  "footer": *[_id == "footerSettings"][0]{      ...,  logo,  nav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  }  }}
+// Query: {  "header": *[_id == "headerSettings"][0]{      ...,  leftNav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  },  rightNav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  },  logo  },  "footer": *[_id == "footerSettings"][0]{      logo,  heading,  email,  items,  nav[]{      ...,    page->{    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  }  }  }}
 export type LayoutQueryResult = {
   header: {
     _id: string;
@@ -1389,34 +1287,12 @@ export type LayoutQueryResult = {
     logo: null;
   } | null;
   footer: {
-    _id: string;
-    _type: "assist.instruction.context";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    context?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
     logo: null;
+    heading: null;
+    email: null;
+    items: null;
     nav: null;
   } | {
-    _id: string;
-    _type: "footerSettings";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
     logo: {
       asset?: {
         _ref: string;
@@ -1428,9 +1304,9 @@ export type LayoutQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
-    heading?: string;
-    items?: Array<string>;
-    email?: string;
+    heading: string | null;
+    email: string | null;
+    items: Array<string> | null;
     nav: Array<{
       _key: string;
       _type: "link";
@@ -1455,182 +1331,6 @@ export type LayoutQueryResult = {
       } | null;
       url?: string;
     }> | null;
-  } | {
-    _id: string;
-    _type: "headerSettings";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    leftNav?: Array<{
-      _key: string;
-    } & Link>;
-    rightNav?: Array<{
-      _key: string;
-    } & Link>;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "homepage";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    slug?: Slug;
-    modules?: Array<{
-      _key: string;
-    } & HeroModule | {
-      _key: string;
-    } & SplitTextModule | {
-      _key: string;
-    } & VideoModule>;
-    seo?: Seo;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "offline";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    slug?: Slug;
-    projects?: Array<{
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      _key: string;
-      [internalGroqTypeReferenceTo]?: "project";
-    }>;
-    seo?: Seo;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "online";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    slug?: Slug;
-    modules?: Array<{
-      _key: string;
-    } & ListModule | {
-      _key: string;
-    } & SliderModule | {
-      _key: string;
-    } & TextModule | {
-      _key: string;
-    } & VideoModule>;
-    seo?: Seo;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "project";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title: string;
-    rows?: Array<{
-      images: Array<{
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-        _key: string;
-      }>;
-      text: SimplePortableText;
-      _type: "row";
-      _key: string;
-    }>;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "redirect";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    from: string;
-    to?: string;
-    isPermanent?: boolean;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "sanity.fileAsset";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    originalFilename?: string;
-    label?: string;
-    title?: string;
-    description?: string;
-    altText?: string;
-    sha1hash?: string;
-    extension?: string;
-    mimeType?: string;
-    size?: number;
-    assetId?: string;
-    uploadId?: string;
-    path?: string;
-    url?: string;
-    source?: SanityAssetSourceData;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "sanity.imageAsset";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    originalFilename?: string;
-    label?: string;
-    title?: string;
-    description?: string;
-    altText?: string;
-    sha1hash?: string;
-    extension?: string;
-    mimeType?: string;
-    size?: number;
-    assetId?: string;
-    uploadId?: string;
-    path?: string;
-    url?: string;
-    metadata?: SanityImageMetadata;
-    source?: SanityAssetSourceData;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "site";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    URL?: string;
-    gtmID?: string;
-    seo?: Seo;
-    logo: null;
-    nav: null;
-  } | {
-    _id: string;
-    _type: "textPage";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    slug?: Slug;
-    body?: ComplexPortableText;
-    seo?: Seo;
-    logo: null;
-    nav: null;
   } | null;
 };
 // Variable: homeQuery
@@ -1938,24 +1638,7 @@ export type GetTextPageQueryResult = {
   seo: {
     _type: "seo";
     title: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
+    description?: string;
     ogImage?: {
       asset?: {
         _ref: string;
@@ -1987,7 +1670,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_id == \"site\"][0]{\n  ...,\n  title,\n  URL,\n  gtmID,\n  seo{\n    \n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n\n  }\n}": SettingsQueryResult;
-    "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  leftNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  rightNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  logo\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  ...,\n  logo,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  }\n\n  }\n}": LayoutQueryResult;
+    "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  leftNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  rightNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  logo\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  logo,\n  heading,\n  email,\n  items,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  }\n\n  }\n}": LayoutQueryResult;
     "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
     "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
     "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]\n\n  }\n}": OfflineQueryResult;

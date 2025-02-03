@@ -7,7 +7,27 @@ import Image from "@/app/_components/Image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-function OfflineProjects({ projects }) {
+
+type ProjectRowProps = {
+  _key: string;
+  images: any[];
+  text: PortableTextBlock[];
+}
+
+type ProjectProps = {
+  _id: string;
+  title: string;
+  year: string;
+  rows: Array<ProjectRowProps>
+};
+
+export type OfflineProjectsProps = {
+  projects: any[]
+};
+
+export function OfflineProjects({
+  projects
+}: OfflineProjectsProps) {
 
 	const [openIndex, setOpenIndex] = useState(false);
 
@@ -23,7 +43,12 @@ function OfflineProjects({ projects }) {
 	)
 }
 
-function OfflineProject({ i, project, openIndex, setOpenIndex }) {
+function OfflineProject({ i, project, openIndex, setOpenIndex }: {
+  i: number;
+  project: ProjectProps;
+  openIndex?: any;
+  setOpenIndex: any
+}) {
   const isOpen = i === openIndex;
 
   // By using `AnimatePresence` to mount and unmount the contents, we can animate
@@ -63,7 +88,7 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }) {
 
 
 
-function ProjectRow({images, text}){
+function ProjectRow({images, text}: ProjectRowProps) {
   return (
     <div>
       { images?.length && (

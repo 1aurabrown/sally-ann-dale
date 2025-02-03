@@ -2,8 +2,20 @@ import Image from "@/app/_components/Image";
 import { type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/_components/PortableText";
 
-export default function HeroModule({ _type, heading, image, body }) {
-  console.log(_type)
+
+type HeroModuleProps = {
+  _type:string;
+  image: any;
+  heading: PortableTextBlock[];
+  body: PortableTextBlock[];
+};
+
+export default function HeroModule({
+  _type,
+  image,
+  heading,
+  body,
+}: HeroModuleProps) {
   if (_type != 'heroModule') return
   return (
     <section>

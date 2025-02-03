@@ -4,12 +4,18 @@ import { sanityFetch } from "@/sanity/lib/live";
 import Modules from '@/app/_components/modules';
 import { homeQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
+import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
 
 
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
  */
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata
@@ -20,11 +26,11 @@ export async function generateMetadata(
     stega: false,
   });
 
-  const previousImages = (await parent).openGraph?.images || [];
+const previousImages = (await parent).openGraph?.images || [];
   const ogImage = resolveOpenGraphImage(homepage?.seo?.ogImage);
 
   return {
-    title: homepage?.seo?.title,
+    title: homepage?.seo?.title || homepage?.title,
     description: homepage?.seo?.description,
     openGraph: {
       images: ogImage ? [ogImage, ...previousImages] : previousImages,

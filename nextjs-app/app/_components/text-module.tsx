@@ -1,7 +1,15 @@
 import { type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/_components/PortableText";
 
-export default function TextModule({ _type, body }) {
+type TextModuleProps = {
+  _type: string;
+  body: PortableTextBlock[];
+};
+
+export default function TextModule ({
+  _type,
+  body
+}: TextModuleProps) {
   if (_type != 'textModule') return
   return (
     <section>

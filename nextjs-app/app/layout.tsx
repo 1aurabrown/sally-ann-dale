@@ -8,7 +8,7 @@ import { VisualEditing, toPlainText } from "next-sanity";
 import { Toaster } from "sonner";
 
 import DraftModeToast from "@/app/_components/DraftModeToast";
-import Footer from "@/app/_components/Footer";
+import { Footer, FooterProps } from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -27,8 +27,8 @@ export async function generateMetadata(): Promise<Metadata> {
     stega: false,
   });
 
-  const title = settings?.seo?.title || settings?.title || demo.title;
-  const description = settings?.seo?.description || demo.description;
+  const title = settings?.seo?.title || settings?.title || 'Sally-Ann Dale';
+  const description = settings?.seo?.description ;
 
   const shareGraphic = resolveOpenGraphImage(settings?.seo?.ogImage);
   let metadataBase: URL | undefined = undefined;
@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
+    description: description,
     openGraph: {
       images: shareGraphic ? [shareGraphic] : [],
     },
@@ -87,9 +87,9 @@ export default async function RootLayout({
           )}
           {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header {...layout.header}/>
+          <Header />
           <main className="">{children}</main>
-          <Footer {...layout.footer}/>
+          <Footer {...layout.footer as FooterProps}/>
         </section>
         <SpeedInsights />
       </body>

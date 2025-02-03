@@ -1,7 +1,21 @@
 import { type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/_components/PortableText";
 
-export default function SplitTextModule({ _type, headingLeft, headingRight, bodyLeft, bodyRight }) {
+type SplitTextModuleProps = {
+  _type: string;
+  headingLeft: string;
+  headingRight: string
+  bodyLeft: PortableTextBlock[];
+  bodyRight: PortableTextBlock[];
+};
+
+export default function SplitTextModule ({
+  _type,
+  headingLeft,
+  headingRight,
+  bodyLeft,
+  bodyRight
+}: SplitTextModuleProps) {
   if (_type != 'splitTextModule') return
   return (
     <section>

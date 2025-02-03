@@ -43,8 +43,10 @@ const link = `
 `;
 
 const footer = `
-  ...,
   logo,
+  heading,
+  email,
+  items,
   nav[]{
     ${link}
   }

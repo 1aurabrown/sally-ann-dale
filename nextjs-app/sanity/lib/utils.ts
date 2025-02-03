@@ -1,5 +1,4 @@
 import createImageUrlBuilder from "@sanity/image-url";
-import { Link } from "@/sanity.types";
 import { dataset, projectId, studioUrl } from "@/sanity/lib/api";
 import { createDataAttribute, CreateDataAttributeProps } from "next-sanity";
 
@@ -7,6 +6,16 @@ const imageBuilder = createImageUrlBuilder({
   projectId: projectId || "",
   dataset: dataset || "",
 });
+
+type Link = {
+  url?: string;
+  linkType: string;
+  page?: {
+    "type": string;
+    "slug": string;
+    "isHome": boolean;
+  }
+}
 
 export const urlForImage = (source: any) => {
   // Ensure that source image contains a valid reference
@@ -29,14 +38,14 @@ export function linkResolver(link: Link | undefined) {
 
   if (!link) return null;
 
-  // If linkType is not set but href is, lets set linkType to "href".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
-  if (!link.linkType && link.href) {
-    link.linkType = "href";
+  // If linkType is not set but url is, lets set linkType to "url".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
+  if (!link.linkType && link.url) {
+    link.linkType = "url";
   }
 
   switch (link.linkType) {
     case "url":
-      return link.href || null;
+      return link.url || null;
     case "page":
       if (link?.page && link.page?.isHome === true) {
         return `/`;

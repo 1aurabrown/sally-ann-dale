@@ -1,12 +1,11 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { type PortableTextBlock } from "next-sanity";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 import PortableText from "@/app/_components/PortableText";
 import { sanityFetch } from "@/sanity/lib/live";
 import { textPagesSlugs, getTextPageQuery } from "@/sanity/lib/queries";
-
-import {formatMetadata} from "@/app/_lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -42,7 +41,16 @@ export async function generateMetadata(
     stega: false,
   });
 
-  return formatMetadata(page, parent) satisfies Metadata;
+  const previousImages = (await parent).openGraph?.images || [];
+  const ogImage = resolveOpenGraphImage(page?.seo?.ogImage);
+
+  return {
+    title: page?.seo?.title || page?.title,
+    description: page?.seo?.description,
+    openGraph: {
+      images: ogImage ? [ogImage, ...previousImages] : previousImages,
+    },
+  } satisfies Metadata;
 }
 
 export default async function TextPage(props: Props) {

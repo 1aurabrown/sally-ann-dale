@@ -1,6 +1,20 @@
 import ResolvedLink from './ResolvedLink'
 
-export default function Footer({email, nav, heading, items}) {
+export type FooterProps = {
+  logo?: any;
+  heading?: string;
+  items?: Array<string>;
+  email?: string;
+  nav?: Array<any>;
+};
+
+export function Footer({
+  email,
+  nav,
+  logo,
+  heading,
+  items,
+}: FooterProps) {
   return (
     <footer className="">
       <div className="container">
@@ -8,7 +22,7 @@ export default function Footer({email, nav, heading, items}) {
           <a title="Email Sally-Ann" href={"mailto:" + email}>{email}</a>
 
           <ul>
-            {nav.map(navItem => {
+            {nav?.length && nav.map(navItem => {
               return(
                 <li className="block w-full" key={navItem._key}>
                   <ResolvedLink link={navItem}>{navItem.title}</ResolvedLink>
@@ -19,7 +33,7 @@ export default function Footer({email, nav, heading, items}) {
           <div>
             <h5 className="text-xl">{heading}</h5>
             <ul>
-              {items.map((item, i) => {
+              {items?.length && items.map((item, i) => {
                 return(
                   <li key={i}>{item}<br/></li>
                 )
