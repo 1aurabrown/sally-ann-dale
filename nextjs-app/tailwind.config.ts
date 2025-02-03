@@ -1,6 +1,61 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
 
+
+const spacing = {
+  // Theme-specific spacing
+  // Add here
+  'header': 'var(--header-height)',
+  'vh-less-header': 'calc(100vh - var(--header-height))',
+  // General spacing
+  // Add more granular measurements as needed
+  'thin': '.125rem',
+   // fractions
+  '1/2': 100.0 * 1/2 + '%',
+  '1/3': 100.0 * 1/3 + '%',
+  '2/3': 100.0 * 2/3 + '%',
+  '1/4': 100.0 * 1/4 + '%',
+  '2/4': 100.0 * 2/4 + '%',
+  '3/4': 100.0 * 3/4 + '%',
+  '1/6': 100.0 * 1/6 + '%',
+  '2/6': 100.0 * 2/6 + '%',
+  '3/6': 100.0 * 3/6 + '%',
+  '4/6': 100.0 * 4/6 + '%',
+  '5/6': 100.0 * 5/6 + '%',
+  '1/8': 100.0 * 1/8 + '%',
+  '2/8': 100.0 * 2/8 + '%',
+  '3/8': 100.0 * 3/8 + '%',
+  '4/8': 100.0 * 4/8 + '%',
+  '5/8': 100.0 * 5/8 + '%',
+  '6/8': 100.0 * 6/8 + '%',
+  '7/8': 100.0 * 7/8 + '%',
+  // percents
+  '0-per': '0%',
+  '5-per': '5%',
+  '10-per': '10%',
+  '15-per': '15%',
+  '20-per': '20%',
+  '25-per': '25%',
+  '30-per': '30%',
+  '35-per': '35%',
+  '40-per': '40%',
+  '45-per': '45%',
+  '50-per': '50%',
+  '55-per': '55%',
+  '60-per': '60%',
+  '65-per': '65%',
+  '70-per': '70%',
+  '75-per': '75%',
+  '80-per': '80%',
+  '85-per': '85%',
+  '90-per': '90%',
+  '95-per': '95%',
+};
+
+for (let i = 0; i < 101; i++) {
+  spacing[i] = `${i/4.000}rem`
+}
+
 export default {
   content: ["./app/**/*.{ts,tsx}", "./sanity/**/*.{ts,tsx}"],
   theme: {
@@ -8,92 +63,20 @@ export default {
       center: true,
       padding: "2rem",
     },
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      inherit: 'inherit',
+      white: '#ffffff',
+      green: '#33471F',
+      black: '#000000',
+    },
+    fontFamily: {
+    },
     extend: {
-      boxShadow: {
-        layer: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
-      },
-      colors: {
-        black: "#0d0e12",
-        white: "#fff",
-        cyan: {
-          50: "#e7fefe",
-          100: "#c5fcfc",
-          200: "#96f8f8",
-          300: "#62efef",
-          400: "#18e2e2",
-          500: "#04b8be",
-          600: "#037782",
-          700: "#024950",
-          800: "#042f34",
-          900: "#072227",
-          950: "#0d181c",
-        },
-        gray: {
-          50: "#f6f6f8",
-          100: "#eeeef1",
-          200: "#e3e4e8",
-          300: "#bbbdc9",
-          400: "#9499ad",
-          500: "#727892",
-          600: "#515870",
-          700: "#383d51",
-          800: "#252837",
-          900: "#1b1d27",
-          950: "#13141b",
-        },
-        red: {
-          50: "#fff6f5",
-          100: "#ffe7e5",
-          200: "#ffdedc",
-          300: "#fdada5",
-          400: "#f77769",
-          500: "#ef4434",
-          600: "#cc2819",
-          700: "#8b2018",
-          800: "#4d1714",
-          900: "#321615",
-          950: "#1e1011",
-        },
-        orange: {
-          50: "#fcf1e8",
-          100: "#f9e3d2",
-          200: "#f4c7a6",
-          300: "#efab7a",
-          400: "#ea8f4e",
-          500: "#e57322",
-          600: "#ba5f1e",
-          700: "#8f4b1b",
-          800: "#653818",
-          900: "#3a2415",
-          950: "#251a13",
-        },
-        yellow: {
-          50: "#fefae1",
-          100: "#fcf3bb",
-          200: "#f9e994",
-          300: "#f7d455",
-          400: "#f9bc15",
-          500: "#d28a04",
-          600: "#965908",
-          700: "#653a0b",
-          800: "#3b220c",
-          900: "#271a11",
-          950: "#181410",
-        },
-        green: {
-          50: "#e7f9ed",
-          100: "#d0f4dc",
-          200: "#a1eaba",
-          300: "#72e097",
-          400: "#43d675",
-          500: "#3ab564",
-          600: "#329454",
-          700: "#297343",
-          800: "#215233",
-          900: "#183122",
-          950: "#14211a",
-        },
-      },
+      spacing: spacing,
+      minHeight: spacing,
+      maxHeight: spacing,
       fontFamily: {
         sans: ["var(--font-inter)"],
       },

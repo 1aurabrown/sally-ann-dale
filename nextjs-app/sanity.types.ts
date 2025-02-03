@@ -464,8 +464,154 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_id == "site"][0]{   ...,  title,  URL,  gtmID,  seo{      ...,  metaTitle,  metaDesc,  shareTitle,  shareDesc,  shareGraphic{      ...,  "alt": coalesce(alt, asset->altText),  crop,  customRatio,  hotspot,  "id": asset->assetId,  "type": asset->mimeType,  "aspectRatio": asset->metadata.dimensions.aspectRatio,  "lqip": asset->metadata.lqip,  asset->  }  }, }
 export type SettingsQueryResult = {
+  _id: string;
+  _type: "assist.instruction.context";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string | null;
+  context?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  slug: Slug;
+  heading: string;
+  subheading?: string;
+  pageBuilder?: Array<{
+    _key: string;
+  } & CallToAction | {
+    _key: string;
+  } & InfoSection>;
+  title: null;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "person";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName: string;
+  lastName: string;
+  picture: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  title: null;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  content?: BlockContent;
+  excerpt?: string;
+  coverImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  date?: string;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "person";
+  };
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title: string | null;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title: string | null;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
   _id: string;
   _type: "settings";
   _createdAt: string;
@@ -503,7 +649,379 @@ export type SettingsQueryResult = {
     metadataBase?: string;
     _type: "image";
   };
+  URL: null;
+  gtmID: null;
+  seo: null;
 } | null;
+// Variable: layoutQuery
+// Query: {  "header": *[_id == "headerSettings"][0]{      ...,  leftNav[]{      ...,  page->{    title,    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  },  },  rightNav[]{      ...,  page->{    title,    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  },  },  logo{      ...,  "alt": coalesce(alt, asset->altText),  crop,  customRatio,  hotspot,  "id": asset->assetId,  "type": asset->mimeType,  "aspectRatio": asset->metadata.dimensions.aspectRatio,  "lqip": asset->metadata.lqip,  asset->  }  },  "footer": *[_id == "footerSettings"][0]{      ...,  logo{      ...,  "alt": coalesce(alt, asset->altText),  crop,  customRatio,  hotspot,  "id": asset->assetId,  "type": asset->mimeType,  "aspectRatio": asset->metadata.dimensions.aspectRatio,  "lqip": asset->metadata.lqip,  asset->  },  nav[]{      ...,  page->{    title,    "type": _type,    "slug": slug.current,    "isHome": _id==homepage,  },  }  }}
+export type LayoutQueryResult = {
+  header: {
+    _id: string;
+    _type: "assist.instruction.context";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    context?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "page";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name: string;
+    slug: Slug;
+    heading: string;
+    subheading?: string;
+    pageBuilder?: Array<{
+      _key: string;
+    } & CallToAction | {
+      _key: string;
+    } & InfoSection>;
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "person";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName: string;
+    lastName: string;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "post";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    slug: Slug;
+    content?: BlockContent;
+    excerpt?: string;
+    coverImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    date?: string;
+    author?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "person";
+    };
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "sanity.fileAsset";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    originalFilename?: string;
+    label?: string;
+    title?: string;
+    description?: string;
+    altText?: string;
+    sha1hash?: string;
+    extension?: string;
+    mimeType?: string;
+    size?: number;
+    assetId?: string;
+    uploadId?: string;
+    path?: string;
+    url?: string;
+    source?: SanityAssetSourceData;
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "sanity.imageAsset";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    originalFilename?: string;
+    label?: string;
+    title?: string;
+    description?: string;
+    altText?: string;
+    sha1hash?: string;
+    extension?: string;
+    mimeType?: string;
+    size?: number;
+    assetId?: string;
+    uploadId?: string;
+    path?: string;
+    url?: string;
+    metadata?: SanityImageMetadata;
+    source?: SanityAssetSourceData;
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | {
+    _id: string;
+    _type: "settings";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    ogImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      metadataBase?: string;
+      _type: "image";
+    };
+    leftNav: null;
+    rightNav: null;
+    logo: null;
+  } | null;
+  footer: {
+    _id: string;
+    _type: "assist.instruction.context";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    context?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "page";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name: string;
+    slug: Slug;
+    heading: string;
+    subheading?: string;
+    pageBuilder?: Array<{
+      _key: string;
+    } & CallToAction | {
+      _key: string;
+    } & InfoSection>;
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "person";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    firstName: string;
+    lastName: string;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "post";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    slug: Slug;
+    content?: BlockContent;
+    excerpt?: string;
+    coverImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    date?: string;
+    author?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "person";
+    };
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "sanity.fileAsset";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    originalFilename?: string;
+    label?: string;
+    title?: string;
+    description?: string;
+    altText?: string;
+    sha1hash?: string;
+    extension?: string;
+    mimeType?: string;
+    size?: number;
+    assetId?: string;
+    uploadId?: string;
+    path?: string;
+    url?: string;
+    source?: SanityAssetSourceData;
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "sanity.imageAsset";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    originalFilename?: string;
+    label?: string;
+    title?: string;
+    description?: string;
+    altText?: string;
+    sha1hash?: string;
+    extension?: string;
+    mimeType?: string;
+    size?: number;
+    assetId?: string;
+    uploadId?: string;
+    path?: string;
+    url?: string;
+    metadata?: SanityImageMetadata;
+    source?: SanityAssetSourceData;
+    logo: null;
+    nav: null;
+  } | {
+    _id: string;
+    _type: "settings";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    ogImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      metadataBase?: string;
+      _type: "image";
+    };
+    logo: null;
+    nav: null;
+  } | null;
+};
 // Variable: getPageQuery
 // Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
 export type GetPageQueryResult = {
@@ -707,7 +1225,8 @@ export type PagesSlugsResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"settings\"][0]": SettingsQueryResult;
+    "*[_id == \"site\"][0]{ \n  ...,\n  title,\n  URL,\n  gtmID,\n  seo{\n    \n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic{\n    \n  ...,\n  \"alt\": coalesce(alt, asset->altText),\n  crop,\n  customRatio,\n  hotspot,\n  \"id\": asset->assetId,\n  \"type\": asset->mimeType,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n  \"lqip\": asset->metadata.lqip,\n  asset->\n\n  }\n\n  }\n, }": SettingsQueryResult;
+    "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  leftNav[]{\n    \n  ...,\n  page->{\n    title,\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  },\n\n  },\n  rightNav[]{\n    \n  ...,\n  page->{\n    title,\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  },\n\n  },\n  logo{\n    \n  ...,\n  \"alt\": coalesce(alt, asset->altText),\n  crop,\n  customRatio,\n  hotspot,\n  \"id\": asset->assetId,\n  \"type\": asset->mimeType,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n  \"lqip\": asset->metadata.lqip,\n  asset->\n\n  }\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  ...,\n  logo{\n    \n  ...,\n  \"alt\": coalesce(alt, asset->altText),\n  crop,\n  customRatio,\n  hotspot,\n  \"id\": asset->assetId,\n  \"type\": asset->mimeType,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n  \"lqip\": asset->metadata.lqip,\n  asset->\n\n  },\n  nav[]{\n    \n  ...,\n  page->{\n    title,\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  },\n\n  }\n\n  }\n}": LayoutQueryResult;
     "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;
     "\n  *[_type == \"post\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": MorePostsQueryResult;

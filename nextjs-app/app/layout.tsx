@@ -12,7 +12,7 @@ import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { settingsQuery } from "@/sanity/lib/queries";
+import { settingsQuery, layoutQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import { handleError } from "./client-utils";
 
@@ -26,14 +26,15 @@ export async function generateMetadata(): Promise<Metadata> {
     // Metadata should never contain stega
     stega: false,
   });
-  const title = settings?.title || demo.title;
-  const description = settings?.description || demo.description;
 
-  const ogImage = resolveOpenGraphImage(settings?.ogImage);
+  const title = settings?.seo?.title || settings?.title || demo.title;
+  const description = settings?.seo?.description || demo.description;
+
+  const shareGraphic = resolveOpenGraphImage(settings?.seo?.ogImage);
   let metadataBase: URL | undefined = undefined;
   try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
+    metadataBase = settings?.seo?.ogImage?.metadataBase
+      ? new URL(settings.seo?.ogImage.metadataBase)
       : undefined;
   } catch {
     // ignore
@@ -46,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: toPlainText(description),
     openGraph: {
-      images: ogImage ? [ogImage] : [],
+      images: shareGraphic ? [shareGraphic] : [],
     },
   };
 }
@@ -62,6 +63,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  const { data: layout } = await sanityFetch({
+    query: layoutQuery,
+    // Metadata should never contain stega
+    stega: false,
+  });
+
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
@@ -79,9 +87,9 @@ export default async function RootLayout({
           )}
           {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header />
+          <Header {...layout.header}/>
           <main className="">{children}</main>
-          <Footer />
+          <Footer {...layout.footer}/>
         </section>
         <SpeedInsights />
       </body>

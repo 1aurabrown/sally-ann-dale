@@ -1,89 +1,193 @@
 import { defineQuery } from "next-sanity";
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
+const siteDoc = `*[_id == "site"][0]`
+export const homeID = "homepage"
+export const errorID = `${siteDoc}.error->_id`
+const headerDoc = `*[_id == "headerSettings"][0]`
+const footerDoc = `*[_id == "footerSettings"][0]`
+const homeDoc = `*[_type == "homepage" && _id ==  "homepage" ][0]`
+const onlineDoc = `*[_type == "online" && _id ==  "online" ][0]`
+const offlineDoc = `*[_type == "offline" && _id ==  "offline" ][0]`
 
-const postFields = /* groq */ `
-  _id,
-  "status": select(_originalId in path("drafts.**") => "draft", "published"),
-  "title": coalesce(title, "Untitled"),
-  "slug": slug.current,
-  excerpt,
-  coverImage,
-  "date": coalesce(date, _updatedAt),
-  "author": author->{firstName, lastName, picture},
-`;
+
+const imageMeta = `
+  ...,
+  "alt": coalesce(alt, asset->altText),
+  crop,
+  customRatio,
+  hotspot,
+  "id": asset->assetId,
+  "type": asset->mimeType,
+  "aspectRatio": asset->metadata.dimensions.aspectRatio,
+  "lqip": asset->metadata.lqip,
+  asset->
+`
+
+const seo =`
+  ...,
+  metaTitle,
+  metaDesc,
+  shareTitle,
+  shareDesc,
+  shareGraphic{
+    ${imageMeta}
+  }
+`
+
+// Site
+export const site=`
+  ...,
+  title,
+  URL,
+  gtmID,
+  seo{
+    ${seo}
+  }
+`
 
 const linkReference = /* groq */ `
-  _type == "link" => {
-    "page": page->slug.current,
-    "post": post->slug.current
+  page->{
+    "type": _type,
+    "slug": slug.current,
+    "isHome": _id==${homeID},
   }
 `;
 
-const linkFields = /* groq */ `
-  link {
-      ...,
-      ${linkReference}
-      }
+const link = `
+  ...,
+  ${linkReference}
 `;
 
-export const getPageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == $slug][0]{
+const footer = `
+  ...,
+  logo{
+    ${imageMeta}
+  },
+  nav[]{
+    ${link}
+  }
+`
+
+
+// Header
+export const header=`
+  ...,
+  leftNav[]{
+    ${link}
+  },
+  rightNav[]{
+    ${link}
+  },
+  logo{
+    ${imageMeta}
+  }
+`
+
+
+// Construct our content "modules" GROQ
+export const pageModules = `
+  _type == 'splitTextModule' => {
+    ...
+  },
+  _type == 'videoModule' => {
+    ...,
+    image{
+      ${imageMeta}
+    },
+    video{
+      ${imageMeta}
+    },
+  },
+  _type == 'textModule' => {
+    ...
+  },
+  _type == 'listModule' => {
+    ...
+  },
+  _type == 'heroModule' => {
+    ...,
+    image{
+      ${imageMeta}
+    },
+  },
+  _type == 'sliderModule' => {
+    ...,
+    items[] {
+      image{
+        ${imageMeta}
+      },
+      body
+    }
+  }
+`
+
+export const page = `
+  ...,
+  "isHome": _id==${homeID},
+  modules[]{
+    ${pageModules}
+  }
+`
+export const project = `
+  _type,
+  _id,
+  slug,
+  title,
+  year,
+  rows[]
+`
+
+const offline = `
+  ...,
+  projects[]->{
+    ${project}
+  }
+`
+
+
+// All Singleton Settings
+export const settingsQuery = defineQuery(`${siteDoc}{${site}}`);
+
+export const layoutQuery = defineQuery(`{
+  "header": ${headerDoc}{
+    ${header}
+  },
+  "footer": ${footerDoc}{
+    ${footer}
+  }
+}`);
+
+export const homeQuery = defineQuery(`${homeDoc}{${page}}`)
+export const onlineQuery = defineQuery(`${onlineDoc}{${page}}`)
+export const offlineQuery = defineQuery(`${offlineDoc}{${offline}}`)
+
+// below is boilerplate, above is mine
+
+
+export const allTextPagesQuery = defineQuery(`
+  *[_type == "textPage" && defined(slug.current)] | order(date desc, _updatedAt desc) {
+    slug: slug.current
+  }
+`);
+
+export const getTextPageQuery = defineQuery(`
+  *[_type == "textPage" && slug.current == $slug] [0] {
     _id,
     _type,
-    name,
+    title,
     slug,
-    heading,
-    subheading,
-    "pageBuilder": pageBuilder[]{
+    body[]{
       ...,
-      _type == "callToAction" => {
-        ${linkFields},
-      },
-      _type == "infoSection" => {
-        content[]{
-          ...,
-          markDefs[]{
-            ...,
-            ${linkReference}
-          }
-        }
-      },
+      markDefs[]{
+        ...,
+        ${linkReference}
+      }
     },
+    seo{${seo}}
   }
 `);
 
-export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
-    ${postFields}
-  }
-`);
-
-export const morePostsQuery = defineQuery(`
-  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
-    ${postFields}
-  }
-`);
-
-export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug] [0] {
-    content[]{
-    ...,
-    markDefs[]{
-      ...,
-      ${linkReference}
-    }
-  },
-    ${postFields}
-  }
-`);
-
-export const postPagesSlugs = defineQuery(`
-  *[_type == "post" && defined(slug.current)]
-  {"slug": slug.current}
-`);
-
-export const pagesSlugs = defineQuery(`
-  *[_type == "page" && defined(slug.current)]
+export const textPagesSlugs = defineQuery(`
+  *[_type == "textPage" && defined(slug.current)]
   {"slug": slug.current}
 `);

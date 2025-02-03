@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import Head from "next/head";
+import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
+import { type PortableTextBlock } from "next-sanity";
 
-import PageBuilderPage from "@/app/components/PageBuilder";
+import PortableText from "@/app/components/PortableText";
 import { sanityFetch } from "@/sanity/lib/live";
-import { getPageQuery, pagesSlugs } from "@/sanity/lib/queries";
-import { GetPageQueryResult } from "@/sanity.types";
-import { PageOnboarding } from "@/app/components/Onboarding";
+import { textPagesSlugs, getTextPageQuery } from "@/sanity/lib/queries";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -17,8 +17,8 @@ type Props = {
  */
 export async function generateStaticParams() {
   const { data } = await sanityFetch({
-    query: pagesSlugs,
-    // // Use the published perspective in generateStaticParams
+    query: textPagesSlugs,
+    // Use the published perspective in generateStaticParams
     perspective: "published",
     stega: false,
   });
@@ -29,55 +29,63 @@ export async function generateStaticParams() {
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
  */
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(
+  props: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const params = await props.params;
   const { data: page } = await sanityFetch({
-    query: getPageQuery,
+    query: getTextPageQuery,
     params,
     // Metadata should never contain stega
     stega: false,
   });
+  const previousImages = (await parent).openGraph?.images || [];
+  const ogImage = resolveOpenGraphImage(page?.coverImage);
 
   return {
-    title: page?.name,
-    description: page?.heading,
+    title: page?.title,
+    description: page?.excerpt,
+    openGraph: {
+      images: ogImage ? [ogImage, ...previousImages] : previousImages,
+    },
   } satisfies Metadata;
 }
 
-export default async function Page(props: Props) {
+export default async function TextPage(props: Props) {
   const params = await props.params;
   const [{ data: page }] = await Promise.all([
-    sanityFetch({ query: getPageQuery, params }),
+    sanityFetch({ query: getTextPageQuery, params }),
   ]);
 
   if (!page?._id) {
-    return (
-      <div className="py-40">
-        <PageOnboarding />
-      </div>
-    );
+    return notFound();
   }
 
   return (
-    <div className="my-12 lg:my-24">
-      <Head>
-        <title>{page.heading}</title>
-      </Head>
+    <>
       <div className="">
-        <div className="container">
-          <div className="pb-6 border-b border-gray-100">
-            <div className="max-w-3xl">
-              <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
-                {page.heading}
-              </h2>
-              <p className="mt-4 text-base lg:text-lg leading-relaxed text-gray-600 uppercase font-light">
-                {page.subheading}
-              </p>
+        <div className="container my-12 lg:my-24 grid gap-12">
+          <div>
+            <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
+              <div className="max-w-3xl flex flex-col gap-6">
+                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+                  {page.title}
+                </h2>
+              </div>
             </div>
+            <article className="gap-6 grid max-w-4xl">
+              {page.body?.length && (
+                <PortableText
+                  className="max-w-2xl"
+                  value={page.body as PortableTextBlock[]}
+                />
+              )}
+            </article>
           </div>
         </div>
       </div>
-      <PageBuilderPage page={page as GetPageQueryResult} />
-    </div>
+
+    </>
   );
 }

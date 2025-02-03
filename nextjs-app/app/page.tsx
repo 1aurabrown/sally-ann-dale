@@ -1,67 +1,62 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { sanityFetch } from "@/sanity/lib/live";
+import Modules from './components/modules';
+import { homeQuery } from "@/sanity/lib/queries";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
-import { AllPosts } from "@/app/components/Posts";
-import GetStartedCode from "@/app/components/GetStartedCode";
 
-export default async function Page() {
+/**
+ * Generate metadata for the page.
+ * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
+ */
+export async function generateMetadata(
+  props: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data: homepage } = await sanityFetch({
+    query: homeQuery,
+    // Metadata should never contain stega
+    stega: false,
+  });
+
+  console.log(homepage)
+  const previousImages = (await parent).openGraph?.images || [];
+  const ogImage = resolveOpenGraphImage(homepage?.seo?.ogImage);
+
+  return {
+    title: homepage?.seo?.title,
+    description: homepage?.seo?.description,
+    openGraph: {
+      images: ogImage ? [ogImage, ...previousImages] : previousImages,
+    },
+  } satisfies Metadata;
+}
+
+export default async function homepagePage(props: Props) {
+  const { data: homepage } = await sanityFetch({ query: homeQuery });
+
+  if (!homepage?._id) {
+    return notFound();
+  }
+
   return (
     <>
-      <div className="bg-gradient-to-r from-red-200 from-0% via-white via-40%  relative">
-        <div className="bg-gradient-to-b from-white w-full h-40 absolute top-0"></div>
-        <div className="bg-gradient-to-t from-white w-full h-40 absolute bottom-0"></div>
-        <div className="container relative">
-          <div className="mx-auto max-w-2xl py-20 lg:max-w-4xl lg:px-12 text-center">
-            <div className="flex flex-col gap-4 items-center">
-              <div className=" text-md leading-6 prose uppercase">
-                A starter template for
+      <div className="">
+        <div className="container my-12 lg:my-24 grid gap-12">
+          <div>
+            <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
+              <div className="max-w-3xl flex flex-col gap-6">
+                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+                  {homepage.title}
+                </h2>
               </div>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
-                <Link className="text-red-500 " href="https://sanity.io/">
-                  Sanity
-                </Link>{" "}
-                +{" "}
-                <Link className="text-[#000] " href="https://nextjs.org/">
-                  Next.js
-                </Link>
-              </h1>
+
             </div>
-            <div className="mt-6 space-y-6 prose sm:prose-lg md:prose-xl lg:prose-2xl text-gray-700">
-              <p>
-                This starter is a statically generated site that uses Next.js
-                for the frontend and Sanity to handle its content. It comes with
-                a standalone Sanity Studio that offers features like real-time
-                collaboration, instant side-by-side content previews, and
-                intuitive editing.
-              </p>
-            </div>
-            <div className="flex items-center flex-col gap-4">
-              <GetStartedCode />
-              <Link
-                href="https://www.sanity.io/docs"
-                className="inline-flex text-red-500 text-xs md:text-sm underline hover:text-gray-900"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Sanity Documentation
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-4 h-4 ml-1 inline"
-                  fill="currentColor"
-                >
-                  <path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V12L17.206 8.207L11.2071 14.2071L9.79289 12.7929L15.792 6.793L12 3H21Z"></path>
-                </svg>
-              </Link>
-            </div>
+            <article className="gap-6 grid max-w-4xl">
+              <Modules modules={homepage.modules} />
+            </article>
           </div>
-        </div>
-      </div>
-      <div className="border-t border-gray-10">
-        <div className="container">
-          <aside className="py-12 sm:py-20">
-            <Suspense>{await AllPosts()}</Suspense>
-          </aside>
         </div>
       </div>
     </>

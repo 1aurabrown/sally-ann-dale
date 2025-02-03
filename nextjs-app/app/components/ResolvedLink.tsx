@@ -14,6 +14,7 @@ export default function ResolvedLink({
   className,
 }: ResolvedLinkProps) {
   // resolveLink() is used to determine the type of link and return the appropriate URL.
+
   const resolvedLink = linkResolver(link);
 
   if (typeof resolvedLink === "string") {

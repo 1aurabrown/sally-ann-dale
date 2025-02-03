@@ -9,7 +9,7 @@ import { Browser, AlignTopSimple, AlignBottomSimple, GlobeHemisphereWest } from 
  * Learn more: https://www.sanity.io/docs/structure-builder-introduction
  */
 
-const DISABLED_TYPES = ['settings', 'site', 'homepage', 'online', 'offline', 'headerSettings', 'footerSettings', 'assist.instruction.context']
+const DISABLED_TYPES = ['site', 'homepage', 'online', 'offline', 'headerSettings', 'footerSettings', 'assist.instruction.context']
 
 export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
@@ -102,8 +102,4 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .map((listItem) => {
           return listItem.title(pluralize(listItem.getTitle() as string))
         }),
-      // Settings Singleton in order to view/edit the one particular document for Settings.  Learn more about Singletons: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
-      S.listItem()
-        .title('Site Settings')
-        .child(S.document().schemaType('site').documentId('site'))
     ])
