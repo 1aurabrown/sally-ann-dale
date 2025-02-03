@@ -2,10 +2,11 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { type PortableTextBlock } from "next-sanity";
 
-import PortableText from "@/app/components/PortableText";
+import PortableText from "@/app/_components/PortableText";
 import { sanityFetch } from "@/sanity/lib/live";
 import { textPagesSlugs, getTextPageQuery } from "@/sanity/lib/queries";
-import { resolveOpenGraphImage } from "@/sanity/lib/utils";
+
+import {formatMetadata} from "@/app/_lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,16 +41,8 @@ export async function generateMetadata(
     // Metadata should never contain stega
     stega: false,
   });
-  const previousImages = (await parent).openGraph?.images || [];
-  const ogImage = resolveOpenGraphImage(page?.coverImage);
 
-  return {
-    title: page?.title,
-    description: page?.excerpt,
-    openGraph: {
-      images: ogImage ? [ogImage, ...previousImages] : previousImages,
-    },
-  } satisfies Metadata;
+  return formatMetadata(page, parent) satisfies Metadata;
 }
 
 export default async function TextPage(props: Props) {
@@ -65,19 +58,18 @@ export default async function TextPage(props: Props) {
   return (
     <>
       <div className="">
-        <div className="container my-12 lg:my-24 grid gap-12">
+        <div className="container my-12 lg:my-24">
           <div>
-            <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
-              <div className="max-w-3xl flex flex-col gap-6">
+            <div className="pb-6 mb-6 border-b border-gray-100">
+              <div className="max-w-3xl">
                 <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
                   {page.title}
                 </h2>
               </div>
             </div>
-            <article className="gap-6 grid max-w-4xl">
+            <article>
               {page.body?.length && (
                 <PortableText
-                  className="max-w-2xl"
                   value={page.body as PortableTextBlock[]}
                 />
               )}

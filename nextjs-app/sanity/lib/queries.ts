@@ -9,29 +9,13 @@ const homeDoc = `*[_type == "homepage" && _id ==  "homepage" ][0]`
 const onlineDoc = `*[_type == "online" && _id ==  "online" ][0]`
 const offlineDoc = `*[_type == "offline" && _id ==  "offline" ][0]`
 
-
-const imageMeta = `
-  ...,
-  "alt": coalesce(alt, asset->altText),
-  crop,
-  customRatio,
-  hotspot,
-  "id": asset->assetId,
-  "type": asset->mimeType,
-  "aspectRatio": asset->metadata.dimensions.aspectRatio,
-  "lqip": asset->metadata.lqip,
-  asset->
-`
-
 const seo =`
   ...,
   metaTitle,
   metaDesc,
   shareTitle,
   shareDesc,
-  shareGraphic{
-    ${imageMeta}
-  }
+  shareGraphic
 `
 
 // Site
@@ -60,9 +44,7 @@ const link = `
 
 const footer = `
   ...,
-  logo{
-    ${imageMeta}
-  },
+  logo,
   nav[]{
     ${link}
   }
@@ -78,9 +60,7 @@ export const header=`
   rightNav[]{
     ${link}
   },
-  logo{
-    ${imageMeta}
-  }
+  logo
 `
 
 
@@ -91,12 +71,8 @@ export const pageModules = `
   },
   _type == 'videoModule' => {
     ...,
-    image{
-      ${imageMeta}
-    },
-    video{
-      ${imageMeta}
-    },
+    image,
+    video,
   },
   _type == 'textModule' => {
     ...
@@ -106,16 +82,12 @@ export const pageModules = `
   },
   _type == 'heroModule' => {
     ...,
-    image{
-      ${imageMeta}
-    },
+    image,
   },
   _type == 'sliderModule' => {
     ...,
     items[] {
-      image{
-        ${imageMeta}
-      },
+      image,
       body
     }
   }
@@ -166,7 +138,7 @@ export const offlineQuery = defineQuery(`${offlineDoc}{${offline}}`)
 
 export const allTextPagesQuery = defineQuery(`
   *[_type == "textPage" && defined(slug.current)] | order(date desc, _updatedAt desc) {
-    slug: slug.current
+    "slug": slug.current
   }
 `);
 

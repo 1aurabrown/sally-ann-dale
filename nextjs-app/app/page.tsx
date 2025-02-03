@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
-import Modules from './components/modules';
+import Modules from '@/app/_components/modules';
 import { homeQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
@@ -20,7 +20,6 @@ export async function generateMetadata(
     stega: false,
   });
 
-  console.log(homepage)
   const previousImages = (await parent).openGraph?.images || [];
   const ogImage = resolveOpenGraphImage(homepage?.seo?.ogImage);
 
@@ -42,22 +41,16 @@ export default async function homepagePage(props: Props) {
 
   return (
     <>
-      <div className="">
-        <div className="container my-12 lg:my-24 grid gap-12">
-          <div>
-            <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
-              <div className="max-w-3xl flex flex-col gap-6">
-                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
-                  {homepage.title}
-                </h2>
-              </div>
+      <div className="container my-12 lg:my-24 grid gap-12">
+        <div className="pb-6 mb-6 border-b border-gray-100">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+            {homepage.title}
+          </h2>
 
-            </div>
-            <article className="gap-6 grid max-w-4xl">
-              <Modules modules={homepage.modules} />
-            </article>
-          </div>
         </div>
+        <article className="max-w-full overflow-hidden grid gap-y-6">
+          <Modules modules={homepage.modules} />
+        </article>
       </div>
     </>
   );

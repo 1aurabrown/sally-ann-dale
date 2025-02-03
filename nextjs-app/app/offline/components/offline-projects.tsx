@@ -1,5 +1,9 @@
 'use client';
 
+import { type PortableTextBlock } from "next-sanity";
+import PortableText from "@/app/_components/PortableText";
+import Image from "@/app/_components/Image";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -47,12 +51,38 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }) {
             }}
             transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
           >
-            <div>{JSON.stringify(project)}</div>
+            {project.rows?.length && project.rows.map((row) => {
+              return(<ProjectRow key={row._key} {...row} />)
+            })}
           </motion.section>
         )}
       </AnimatePresence>
     </>
   );
 };
+
+
+
+function ProjectRow({images, text}){
+  return (
+    <div>
+      { images?.length && (
+        <ul>
+          {images.map((image) => {
+            return (
+              <li key={image._key} >
+                <Image image={image} />
+              </li>
+            )
+          })}
+        </ul>
+      )}
+      {text?.length && <PortableText
+        value={text as PortableTextBlock[]}
+      />}
+    </div>
+  )
+}
+
 
 export default OfflineProjects;

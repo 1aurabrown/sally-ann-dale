@@ -17,7 +17,7 @@ export default function Footer({email, nav, heading, items}) {
             })}
           </ul>
           <div>
-            <h5>{heading}</h5>
+            <h5 className="text-xl">{heading}</h5>
             <ul>
               {items.map((item, i) => {
                 return(

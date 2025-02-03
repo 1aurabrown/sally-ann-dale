@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { sanityFetch } from "@/sanity/lib/live";
-import Modules from '../components/modules';
+import Modules from '@/app/_components/modules';
 import { notFound } from "next/navigation";
 
 import { onlineQuery } from "@/sanity/lib/queries";
@@ -42,15 +42,16 @@ export default async function OnlinePage(props: Props) {
 
   return (
     <>
-      <div className="">
-        <div className="container relative">
+      <div className="container my-12 lg:my-24 grid gap-12">
+        <div className="pb-6 mb-6 border-b border-gray-100">
           <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
             {online.title}
           </h2>
 
-
-	        <Modules modules={online.modules} />
         </div>
+        <article className="max-w-full overflow-hidden grid gap-y-6">
+          <Modules modules={online.modules} />
+        </article>
       </div>
     </>
   );
