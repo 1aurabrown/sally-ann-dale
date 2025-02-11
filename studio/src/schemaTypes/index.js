@@ -2,9 +2,7 @@ import homepage from './singletons/homepage'
 import online from './singletons/online'
 import offline from './singletons/offline'
 import textPage from './documents/text-page'
-import redirect from './documents/redirect'
 import site from './singletons/site'
-import headerSettings from './singletons/settings-header'
 import footerSettings from './singletons/settings-footer'
 import project from './documents/project'
 
@@ -31,8 +29,6 @@ export const schemaTypes = [
     online,
     offline,
     textPage,
-    redirect,
-    headerSettings,
     footerSettings,
     project,
 

@@ -21,6 +21,7 @@ export default {
       name: 'slug',
       type: 'slug',
       description: '(required)',
+      hidden: true,
       options: {
         source: 'title',
         maxLength: 96,
