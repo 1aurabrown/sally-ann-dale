@@ -9,7 +9,7 @@ import { Browser, AlignTopSimple, AlignBottomSimple, GlobeHemisphereWest } from 
  * Learn more: https://www.sanity.io/docs/structure-builder-introduction
  */
 
-const DISABLED_TYPES = ['site', 'homepage', 'online', 'offline', 'headerSettings', 'footerSettings', 'assist.instruction.context']
+const DISABLED_TYPES = ['site', 'homepage', 'online', 'offline', 'footerSettings', 'assist.instruction.context']
 
 export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
@@ -28,18 +28,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
                   .schemaType("site")
                   .documentId("site")
               ),
-      S.listItem()
-              .title("Header")
-              .id("headerSettings")
-              .icon(AlignTopSimple)
-              .child(
-                // Instead of rendering a list of documents, we render a single
-                // document, specifying the `documentId` manually to ensure
-                // that we're editing the single instance of the document
-                S.document()
-                  .schemaType("headerSettings")
-                  .documentId("headerSettings")
-              ),
+
 
             S.listItem()
               .title("Footer")
