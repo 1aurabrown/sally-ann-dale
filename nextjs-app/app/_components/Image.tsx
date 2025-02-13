@@ -13,13 +13,13 @@ export default function CoverImage(props: CoverImageProps) {
 
   const image = source?.asset?._ref ? (
     <Image
-      className="object-cover"
+      className="object-contain"
       fill={true}
       alt={stegaClean(source?.alt) || ""}
       src={
         urlForImage(source)
-          ?.height(720)
-          .width(1280)
+          ?.height(845)
+          .width(954)
           .auto("format")
           .url() as string
       }
@@ -30,5 +30,20 @@ export default function CoverImage(props: CoverImageProps) {
     <div className="bg-slate-50" style={{ paddingTop: "100%" }} />
   );
 
-  return <div className="relative aspect-video">{image}</div>;
+  return (
+    <div 
+      className="relative w-full h-[100vh] mx-auto"
+      style={{ 
+        aspectRatio: '954/845', 
+        maxHeight: '845px',
+        maxWidth: '954px',
+        margin: '0 auto',
+        lineHeight: 0,
+        fontSize: 0,
+        verticalAlign: 'top'
+      }}
+    >
+      {image}
+    </div>
+  );
 }

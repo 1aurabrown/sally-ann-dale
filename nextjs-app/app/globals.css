@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Set CircularXX as default body font */
+@layer base {
+  body {
+    font-family: var(--font-circular);
+    @apply text-green;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-louise text-green;
+}
+
+.louize {
+  font-family: var(--font-louize);
+}
+
+.louize-display {
+  font-family: var(--font-louize-display);
+}
+
+.circular {
+  font-family: var(--font-circular);
+}
