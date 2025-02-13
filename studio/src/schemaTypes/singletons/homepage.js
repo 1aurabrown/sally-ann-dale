@@ -20,6 +20,7 @@ export default {
       title: 'URL Slug',
       name: 'slug',
       type: 'slug',
+      hidden: true,
       description: '(required)',
       options: {
         source: 'title',
