@@ -6,6 +6,7 @@ import { homeQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import LogoSvg from './_components/LogoSvg';
 
 
 /**
@@ -47,17 +48,19 @@ export default async function homepagePage(props: Props) {
 
   return (
     <>
-      <div className="container my-12 lg:my-24 grid gap-12">
-        <div className="pb-6 mb-6 border-b border-gray-100">
-          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
-            {homepage.title}
-          </h2>
-
+      <div className="h-[200px] md:h-[250px]" /> {/* Spacer div */}
+      <main className="container mx-auto px-4">
+        <div className="container my-12lg:mb-24 grid gap-12">
+          <div className="flex justify-center">
+            {/* Logo div removed from here */}
+          </div>
+          <div className="">
+            <article className="max-w-full overflow-hidden grid gap-y-6">
+              <Modules modules={homepage.modules} />
+            </article>
+          </div>
         </div>
-        <article className="max-w-full overflow-hidden grid gap-y-6">
-          <Modules modules={homepage.modules} />
-        </article>
-      </div>
+      </main>
     </>
   );
 }
