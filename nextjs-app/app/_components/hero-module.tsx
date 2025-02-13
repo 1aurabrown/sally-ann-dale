@@ -18,19 +18,24 @@ export default function HeroModule({
 }: HeroModuleProps) {
   if (_type != 'heroModule') return
   return (
-    <section>
-      <h2 className="text-2xl">Hero Module</h2>
+    <section className="">
       {image && <Image image={image}/>}
-      {heading?.length && (
-        <h2><PortableText
-          value={heading as PortableTextBlock[]}
-        /></h2>
-      )}
-      {body?.length && (
-        <PortableText
-          value={body as PortableTextBlock[]}
-        />
-      )}
+      <div className="flex gap-16 mt-8">
+        {heading?.length && (
+          <div className="w-3/5">
+            <h2 className="text-6xl leading-tight"><PortableText
+              value={heading as PortableTextBlock[]}
+            /></h2>
+          </div>
+        )}
+        {body?.length && (
+          <div className="w-2/5">
+            <PortableText
+              value={body as PortableTextBlock[]}
+            />
+          </div>
+        )}
+      </div>
     </section>
   )
 }

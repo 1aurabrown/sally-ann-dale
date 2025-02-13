@@ -72,14 +72,13 @@ export default {
       black: '#000000',
     },
     fontFamily: {
+      sans: ["var(--font-circular)", 'sans-serif'],
+      louise: ['var(--font-louise)', 'serif'],
     },
     extend: {
       spacing: spacing,
       minHeight: spacing,
       maxHeight: spacing,
-      fontFamily: {
-        sans: ["var(--font-inter)"],
-      },
     },
   },
   future: {
