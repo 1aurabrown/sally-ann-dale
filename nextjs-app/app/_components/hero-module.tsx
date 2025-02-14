@@ -16,10 +16,17 @@ export default function HeroModule({
   heading,
   body,
 }: HeroModuleProps) {
-  if (_type != 'heroModule') return
+  if (_type != 'heroModule') return null;
+  
   return (
     <section className="">
-      {image && <Image image={image}/>}
+      {image && (
+        <div 
+          className="relative w-full h-[100vh] mx-auto max-h-[845px] max-w-[954px] leading-[0] text-[0] align-top"
+        >
+          <Image image={image} />
+        </div>
+      )}
       <div className="flex gap-16 mt-8">
         {heading?.length && (
           <div className="w-3/5">
