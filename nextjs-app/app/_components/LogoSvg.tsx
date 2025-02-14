@@ -23,26 +23,33 @@ export default function LogoSvg({
 
     useEffect(() => {
       const handleScroll = () => {
-        const scrollPercent = window.scrollY / (window.innerHeight * 0.1)
-        const newScale = Math.max(0.1, 1 - (scrollPercent * 0.9))
-        setScale(newScale)
-      }
+        const viewportHeight = window.innerHeight;
+        const scrollPercent = window.scrollY / viewportHeight;
+        
+        if (scrollPercent < 0.05) {  // Start earlier at 5%
+          setScale(1);  // Full size before 5%
+        } else if (scrollPercent > 0.20) {  // End later at 20%
+          setScale(0.15);  // Final scale of 0.15 (15% of original size)
+        } else {
+          // Smooth scale between 1 and 0.15 from 5% to 20% scroll
+          const progress = (scrollPercent - 0.05) / (0.20 - 0.05);
+          const newScale = 1 - (progress * 0.85);  // Adjusted to reach 0.15 (1 - 0.85 = 0.15)
+          setScale(newScale);
+        }
+      };
 
-      window.addEventListener('scroll', handleScroll)
-      handleScroll() // Initial call
-      return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <div style={{ 
-            width: '100%',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             transform: `scale(${scale})`,
             transformOrigin: 'top center'
         }}>
           <svg 
-            width="100%"
-            height="100%"
+            width={width}
+            height={height}
             viewBox={`0 0 ${typeof viewBoxWidth === 'string' ? 1187 : viewBoxWidth} ${viewBoxHeight}`}
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
