@@ -7,14 +7,15 @@ interface CoverImageProps {
   image: any;
   priority?: boolean;
   className?: string;
+  objectFit?: 'cover' | 'contain';
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const { image: source, priority, className } = props;
+  const { image: source, priority, className, objectFit = 'contain' } = props;
 
   const image = source?.asset?._ref ? (
     <Image
-      className={`object-contain ${className || ''}`}
+      className={`object-${objectFit} ${className || ''}`}
       fill={true}
       alt={stegaClean(source?.alt) || ""}
       src={
