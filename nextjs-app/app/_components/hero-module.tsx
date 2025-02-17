@@ -30,7 +30,7 @@ export default function HeroModule({
       <div className="flex gap-16 mt-8">
         {heading?.length && (
           <div className="w-3/5">
-            <h2 className="text-6xl leading-tight"><PortableText
+            <h2 className="header text-6xl leading-tight"><PortableText
               value={heading as PortableTextBlock[]}
             /></h2>
           </div>
