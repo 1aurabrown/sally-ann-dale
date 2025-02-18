@@ -20,27 +20,73 @@ export default function LogoSvg({
     viewBoxHeight = 126
 }: LogoSvgProps) {
     const [scale, setScale] = useState(1)
+    const [screenSize, setScreenSize] = useState('base')
+
+    useEffect(() => {
+      // Check screen size on mount and resize
+      const checkScreenSize = () => {
+        if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+          setScreenSize('lg')  // Between md and lg breakpoints
+        } else if (window.innerWidth >= 640 && window.innerWidth < 768) {
+          setScreenSize('md')  // Between sm and md breakpoints
+        } else if (window.innerWidth < 640) {
+          setScreenSize('base')  // Below sm breakpoint
+        } else {
+          setScreenSize('xl')  // lg and above
+        }
+      }
+      
+      checkScreenSize()
+      window.addEventListener('resize', checkScreenSize)
+      return () => window.removeEventListener('resize', checkScreenSize)
+    }, [])
 
     useEffect(() => {
       const handleScroll = () => {
         const viewportHeight = window.innerHeight;
         const scrollPercent = window.scrollY / viewportHeight;
         
-        if (scrollPercent < 0.05) {  // Start earlier at 5%
+        if (scrollPercent < 0.05) {
           setScale(1);  // Full size before 5%
-        } else if (scrollPercent > 0.20) {  // End later at 20%
-          setScale(0.15);  // Final scale of 0.15 (15% of original size)
+        } else if (scrollPercent > 0.20) {
+          // Different final scales based on screen size
+          if (screenSize === 'md') {
+            setScale(0.22);  // 22% for md screens
+          } else if (screenSize === 'lg') {
+            setScale(0.20);  // 20% for lg screens
+          } else if (window.innerWidth >= 1280) {
+            setScale(0.15);  // 15% for xl screens and up
+          } else {
+            setScale(0.25);  // 25% for base (smaller screens)
+          }
         } else {
-          // Smooth scale between 1 and 0.15 from 5% to 20% scroll
-          const progress = (scrollPercent - 0.05) / (0.20 - 0.05);
-          const newScale = 1 - (progress * 0.85);  // Adjusted to reach 0.15 (1 - 0.85 = 0.15)
+          // Calculate how far through the transition we are (0 to 1)
+          const scrollProgress = (scrollPercent - 0.05) / (0.20 - 0.05);
+          
+          // Determine target scale based on screen size
+          const targetScale = {
+            md: 0.22,   // Between sm and md (640px - 768px)
+            lg: 0.20,   // Between md and lg (768px - 1024px)
+            xl: 0.15,   // lg and above (≥1024px)
+            base: 0.3   // Below sm (<640px)
+          };
+
+          // Get final scale based on current screen size
+          const finalScale = screenSize === 'md' ? targetScale.md :
+                           screenSize === 'lg' ? targetScale.lg :
+                           window.innerWidth >= 1280 ? targetScale.xl :
+                           targetScale.base;
+
+          // Calculate the scale reduction and apply it progressively
+          const totalReduction = 1 - finalScale;
+          const newScale = 1 - (scrollProgress * totalReduction);
           setScale(newScale);
         }
       };
 
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [screenSize]);
 
     return (
         <div style={{ 
