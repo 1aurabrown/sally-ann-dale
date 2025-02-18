@@ -6,21 +6,21 @@ import { urlForImage } from "@/sanity/lib/utils";
 interface CoverImageProps {
   image: any;
   priority?: boolean;
+  className?: string;
+  objectFit?: 'cover' | 'contain';
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const { image: source, priority } = props;
+  const { image: source, priority, className, objectFit = 'contain' } = props;
 
   const image = source?.asset?._ref ? (
     <Image
-      className="object-cover"
+      className={`object-${objectFit} ${className || ''}`}
       fill={true}
       alt={stegaClean(source?.alt) || ""}
       src={
         urlForImage(source)
-          ?.height(720)
-          .width(1280)
-          .auto("format")
+          ?.auto("format")
           .url() as string
       }
       sizes="100vw"
@@ -30,5 +30,9 @@ export default function CoverImage(props: CoverImageProps) {
     <div className="bg-slate-50" style={{ paddingTop: "100%" }} />
   );
 
-  return <div className="relative aspect-video">{image}</div>;
+  return (
+    <div className="relative w-full h-full">
+      {image}
+    </div>
+  );
 }
