@@ -63,7 +63,7 @@ export default function Header() {
           </div>
         </nav>
         <div 
-          className="transform sm:translate-y-[-22px] md:translate-y-[-20px] xl:translate-y-[-18px] translate-y-[-24px]"
+          className="transform translate-y-[-25px] sm:translate-y-[-20px] md:translate-y-[-23px] xl:translate-y-[-18px]"
           style={{ 
             '--scroll-progress': transitionProgress,
             '--translate-y': 'var(--tw-translate-y)',

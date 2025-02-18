@@ -68,7 +68,7 @@ export default function LogoSvg({
             md: 0.22,   // Between sm and md (640px - 768px)
             lg: 0.20,   // Between md and lg (768px - 1024px)
             xl: 0.15,   // lg and above (≥1024px)
-            base: 0.3   // Below sm (<640px)
+            base: 0.30   // Below sm (<640px)
           };
 
           // Get final scale based on current screen size
