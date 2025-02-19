@@ -51,7 +51,7 @@ export default async function homepagePage(props: Props) {
 
       <div className="h-[200px] md:h-[250px]" /> {/* Spacer div */}
       <main className="container mx-auto px-4">
-        <div className="container my-12lg:mb-24 grid gap-12">
+        <div className="container my-12 lg:mb-24 grid gap-12">
           <div className="flex justify-center">
             {/* Logo div removed from here */}
           </div>

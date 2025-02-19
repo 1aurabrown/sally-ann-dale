@@ -79,6 +79,9 @@ export default {
       spacing: spacing,
       minHeight: spacing,
       maxHeight: spacing,
+      cursor: {
+        'green': 'pointer',
+      },
     },
   },
   future: {
