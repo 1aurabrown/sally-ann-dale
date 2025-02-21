@@ -35,7 +35,7 @@ export default function Header() {
 
   return (
     <header 
-      className={`w-full fixed left-0 z-50 ${
+      className={`mt-[-50px] w-full fixed left-0 z-50 ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm py-4 h-15' : 'pt-5'
       }`}
       
