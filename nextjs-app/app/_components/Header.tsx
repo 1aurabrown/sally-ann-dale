@@ -70,13 +70,15 @@ export default function Header() {
             transform: `translateY(calc(var(--scroll-progress) * var(--translate-y)))`
           } as React.CSSProperties}
         >
-          <LogoSvg 
-            width="100%" 
-            minWidth={118.5} 
-            color="#000000"
-            viewBoxWidth="100%"
-            viewBoxHeight={126} 
-          />
+          <Link href="/">
+            <LogoSvg 
+              width="100%" 
+              minWidth={118.5} 
+              color="#000000"
+              viewBoxWidth="100%"
+              viewBoxHeight={126} 
+            />
+          </Link>
         </div>
       </div>
     </header>
