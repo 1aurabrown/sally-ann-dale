@@ -13,10 +13,3 @@
     @apply font-louise text-green;
   }
 }
-
-@layer utilities {
-  .hover\:cursor-green:hover {
-    cursor: pointer;
-    color: #33471F;
-  }
-}

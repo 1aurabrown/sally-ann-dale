@@ -29,7 +29,6 @@ export type OfflineProjectsProps = {
 export function OfflineProjects({
   projects
 }: OfflineProjectsProps) {
-  // Change from boolean to number | null
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -49,7 +48,6 @@ export function OfflineProjects({
   )
 }
 
-// Update the type in the OfflineProject props
 function OfflineProject({ i, project, openIndex, setOpenIndex }: {
   i: number;
   project: ProjectProps;
@@ -58,17 +56,23 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
 }) {
   const isOpen = i === openIndex;
 
-  // By using `AnimatePresence` to mount and unmount the contents, we can animate
-  // them in and out while also only rendering the contents of open accordions
   return (
     <>
       <motion.header
-	      className="border-t border-black py-2 w-full header text-4xl flex justify-between items-center cursor-pointer hover:text-green"
+        className={`border-t border-black py-4 w-full header text-4xl flex justify-between items-center ${!isOpen ? 'cursor-pointer hover:text-green' : ''}`}
         initial={false}
-        onClick={() => setOpenIndex(isOpen ? null : i)}
+        onClick={() => !isOpen && setOpenIndex(i)}
       >
-        <span>{project.title}</span>
-        <span className="header text-4xl">
+        <span>
+          {project.title}
+        </span>
+        <span 
+          className="header text-4xl cursor-pointer hover:text-green"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpenIndex(isOpen ? null : i);
+          }}
+        >
           {isOpen ? '−' : '+'}
         </span>
       </motion.header>
@@ -76,12 +80,11 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
         {isOpen && (
           <motion.section
             style={{ overflow: 'hidden' }}
-            className="cursor-pointer"
+            className=""
             key="content"
             initial="collapsed"
             animate="open"
             exit="collapsed"
-            onClick={() => setOpenIndex(null)}
             variants={{
               open: { opacity: 1, height: "auto" },
               collapsed: { opacity: 0, height: 0 }
@@ -98,30 +101,42 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
       </AnimatePresence>
     </>
   );
-};
+}
 
 
 
 function ProjectRow({images, text}: ProjectRowProps) {
   return (
-    <div className="space-y-8">
-      {images?.length && (
-        <ul className="space-y-4">
-          {images.map((image) => {
+    <div className="flex mb-8 flex-col md:flex-row md:gap-8">
+      <div className={`${images.length > 1 ? 'md:w-2/3' : 'md:w-1/3'}`}>
+        <ul className={`space-y-4 md:space-y-0 md:flex md:gap-8 ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
+          {images.map((image, index) => {
+            const ref = image.asset._ref;
+            const dimensions = ref ? ref.split('-')[2].split('x').map(Number) : [1200, 800];
+            const [width, height] = dimensions;
+            
             return (
-              <li key={image._key} className="relative w-full h-[50vh]">
+              <li key={image._key} 
+                className="relative"
+                style={{ 
+                  width: width / 2, 
+                  height: height / 2,
+                  flex: images.length > 1 ? '1 1 auto' : '0 0 auto'
+                }}
+              >
                 <Image 
                   image={image} 
-                  className="w-full h-full"
+                  className="h-full"
                   objectFit="cover"
                 />
               </li>
             )
           })}
         </ul>
-      )}
+      </div>
+      
       {text?.length && (
-        <div className="prose max-w-none">
+        <div className={`mt-4 md:mt-0 ${images.length > 1 ? 'md:w-1/3' : 'md:w-2/3'}`}>
           <PortableText value={text as PortableTextBlock[]} />
         </div>
       )}
