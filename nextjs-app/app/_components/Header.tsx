@@ -43,7 +43,7 @@ export function Header({
 
   return (
     <header 
-      className={`w-full fixed left-0 z-50 ${
+      className={`mt-[-50px] w-full fixed left-0 z-50 ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm py-4 h-15' : 'pt-5'
       }`}
       
@@ -75,13 +75,15 @@ export function Header({
             transform: `translateY(calc(var(--scroll-progress) * var(--translate-y)))`
           } as React.CSSProperties}
         >
-          <LogoSvg 
-            width="100%" 
-            minWidth={118.5} 
-            color="#000000"
-            viewBoxWidth="100%"
-            viewBoxHeight={126} 
-          />
+          <Link href="/">
+            <LogoSvg 
+              width="100%" 
+              minWidth={118.5} 
+              color="#000000"
+              viewBoxWidth="100%"
+              viewBoxHeight={126} 
+            />
+          </Link>
         </div>
       </div>
     </header>

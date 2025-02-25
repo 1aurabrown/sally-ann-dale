@@ -107,7 +107,16 @@ export const project = `
   slug,
   title,
   year,
-  rows[]
+  rows[]{
+    _key,
+    text,
+    images[]{
+      _key,
+      _type,
+      asset,
+      alt
+    }
+  }
 `
 
 const offline = `

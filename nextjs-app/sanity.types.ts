@@ -1512,7 +1512,7 @@ export type OnlineQueryResult = {
   isHome: false;
 } | null;
 // Variable: offlineQuery
-// Query: *[_type == "offline" && _id ==  "offline" ][0]{  ...,  projects[]->{      _type,  _id,  slug,  title,  year,  rows[]  }}
+// Query: *[_type == "offline" && _id ==  "offline" ][0]{  ...,  projects[]->{      _type,  _id,  slug,  title,  year,  rows[]{    _key,    text,    images[]{      _key,      _type,      asset,      alt    }  }  }}
 export type OfflineQueryResult = {
   _id: string;
   _type: "offline";
@@ -1528,21 +1528,19 @@ export type OfflineQueryResult = {
     title: string;
     year: null;
     rows: Array<{
+      _key: string;
+      text: SimplePortableText;
       images: Array<{
-        asset?: {
+        _key: string;
+        _type: "image";
+        asset: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-        _key: string;
+        } | null;
+        alt: null;
       }>;
-      text: SimplePortableText;
-      _type: "row";
-      _key: string;
     }> | null;
   }> | null;
   seo?: Seo;

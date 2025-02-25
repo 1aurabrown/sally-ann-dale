@@ -22,7 +22,7 @@ export default function HeroModule({
     <section className="">
       {image && (
         <div 
-          className="relative w-full h-[100vh] mx-auto max-h-[845px] max-w-[954px] leading-[0] text-[0] align-top"
+          className="mt-25 relative w-full h-[100vh] mx-auto max-h-[845px] max-w-[954px] leading-[0] text-[0] align-top"
         >
           <Image image={image} />
         </div>
