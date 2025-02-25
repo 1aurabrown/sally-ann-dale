@@ -1539,7 +1539,7 @@ export type OnlineQueryResult = {
   isHome: false;
 } | null;
 // Variable: offlineQuery
-// Query: *[_type == "offline" && _id ==  "offline" ][0]{  ...,  projects[]->{      _type,  _id,  slug,  title,  year,  rows[]  }}
+// Query: *[_type == "offline" && _id ==  "offline" ][0]{  ...,  projects[]->{      _type,  _id,  slug,  title,  year,  rows[]{    _key,    text,    images[]{      _key,      _type,      asset,      alt    }  }  }}
 export type OfflineQueryResult = {
   _id: string;
   _type: "offline";
@@ -1555,21 +1555,19 @@ export type OfflineQueryResult = {
     title: string;
     year: null;
     rows: Array<{
+      _key: string;
+      text: SimplePortableText;
       images: Array<{
-        asset?: {
+        _key: string;
+        _type: "image";
+        asset: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-        _key: string;
+        } | null;
+        alt: null;
       }>;
-      text: SimplePortableText;
-      _type: "row";
-      _key: string;
     }> | null;
   }> | null;
   seo?: Seo;
@@ -1673,7 +1671,7 @@ declare module "@sanity/client" {
     "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  leftNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  rightNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  logo\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  logo,\n  heading,\n  email,\n  items,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  }\n\n  }\n}": LayoutQueryResult;
     "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
     "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
-    "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]\n\n  }\n}": OfflineQueryResult;
+    "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]{\n    _key,\n    text,\n    images[]{\n      _key,\n      _type,\n      asset,\n      alt\n    }\n  }\n\n  }\n}": OfflineQueryResult;
     "\n  *[_type == \"textPage\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \"slug\": slug.current\n  }\n": AllTextPagesQueryResult;
     "\n  *[_type == \"textPage\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    title,\n    slug,\n    body[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n      }\n    },\n    seo{\n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n}\n  }\n": GetTextPageQueryResult;
     "\n  *[_type == \"textPage\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": TextPagesSlugsResult;

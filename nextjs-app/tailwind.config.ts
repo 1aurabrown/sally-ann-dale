@@ -78,8 +78,7 @@ export default {
     extend: {
       spacing: spacing,
       minHeight: spacing,
-      maxHeight: spacing,
-      
+      maxHeight: spacing
     },
   },
   future: {

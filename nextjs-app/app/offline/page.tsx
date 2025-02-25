@@ -6,7 +6,6 @@ import OfflineProjects from "./components/offline-projects"
 import type { Metadata, ResolvingMetadata } from "next";
 
 import { offlineQuery } from "@/sanity/lib/queries";
-import { groq } from "next-sanity";
 
 
 /**

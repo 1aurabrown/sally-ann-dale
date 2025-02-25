@@ -22,10 +22,11 @@ export function Footer({
           <div>
             <h5 className="pt-12">{heading}</h5>
             <ul className="my-12 header text-4xl md:text-6xl text-white space-y-4">
-              {items?.length && items.map((item, i) => {
-                return(
-                  <li key={i}>{item}<br/></li>
-                )
+              {items?.length && items.map((item: any, i) => {
+                if (typeof item === 'object' && item.heading) {
+                  return <li key={i}>{item.heading}<br/></li>
+                }
+                return <li key={i}>{item}<br/></li>
               })}
             </ul>
           </div>
