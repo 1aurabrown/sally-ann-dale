@@ -17,10 +17,26 @@ export default {
       type: 'string',
     },
     {
-      title: 'Items',
+      title: 'Offerings',
       name: 'items',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [{
+        title: 'Offering',
+        name: 'offering',
+        type: 'object',
+        fields: [
+          {
+            title: 'Heading',
+            name: 'heading',
+            type: 'string',
+          },
+          {
+            title: 'Description',
+            name: 'description',
+            type: 'string',
+          }
+        ]
+      }]
     },
     {
       name: "email",

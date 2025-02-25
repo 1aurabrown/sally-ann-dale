@@ -72,9 +72,11 @@ export const pageModules = `
     ...
   },
   _type == 'videoModule' => {
-    ...,
+    _key,
+    _type,
     image,
     video,
+    text
   },
   _type == 'textModule' => {
     ...
