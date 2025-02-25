@@ -10,11 +10,15 @@ export default {
       lists: [],
       marks: {
         decorators: [
-          { title: "Strong", value: "strong" },
-          { title: "Emphasis", value: "em" },
+          { title: 'Strong', value: 'strong' },
+          { title: 'Emphasis', value: 'em' }
         ],
         annotations: [
-
+          {
+            title: 'Link',
+            name: 'link',
+            type: 'link',
+          }
         ]
       }
     }
