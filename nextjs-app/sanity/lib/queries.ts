@@ -56,10 +56,7 @@ const footer = `
 // Header
 export const header=`
   ...,
-  leftNav[]{
-    ${link}
-  },
-  rightNav[]{
+  nav[]{
     ${link}
   },
   logo

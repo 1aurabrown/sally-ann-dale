@@ -28,8 +28,8 @@ export function Footer({
               {items?.length && items.map((item, i) => {
                 return(
                   <div key={i}>
-                    <h3 class="font-louise text-6xl">{item.heading}</h3>
-                    <p class="font-sans">{item.description}</p>
+                    <h3 className="font-louise text-6xl">{item.heading}</h3>
+                    <p className="font-sans">{item.description}</p>
                   </div>
                 )
               })}
