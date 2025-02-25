@@ -18,6 +18,11 @@ export default {
       type: 'image',
       validation: Rule => Rule.required(),
     },
+    {
+      title: 'Text',
+      name: 'text',
+      type: 'simplePortableText'
+    }
   ],
 
   preview: {

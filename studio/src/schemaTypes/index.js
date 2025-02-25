@@ -3,6 +3,7 @@ import online from './singletons/online'
 import offline from './singletons/offline'
 import textPage from './documents/text-page'
 import site from './singletons/site'
+import headerSettings from './singletons/settings-header'
 import footerSettings from './singletons/settings-footer'
 import project from './documents/project'
 
@@ -29,6 +30,7 @@ export const schemaTypes = [
     online,
     offline,
     textPage,
+    headerSettings,
     footerSettings,
     project,
 
