@@ -3,7 +3,10 @@ import ResolvedLink from './ResolvedLink'
 export type FooterProps = {
   logo?: any;
   heading?: string;
-  items?: Array<string>;
+  items?: Array<{
+    heading: string;
+    description?: string;
+  }>;
   email?: string;
   nav?: Array<any>;
 };
@@ -21,10 +24,13 @@ export function Footer({
         <div className="text-white flex flex-col py-12">
           <div>
             <h5 className="pt-12">{heading}</h5>
-            <ul className="my-12 header text-6xl text-white space-y-4">
+            <ul className="my-12  space-y-4">
               {items?.length && items.map((item, i) => {
                 return(
-                  <li key={i}>{item}<br/></li>
+                  <div key={i}>
+                    <h3 class="font-louise text-6xl">{item.heading}</h3>
+                    <p class="font-sans">{item.description}</p>
+                  </div>
                 )
               })}
             </ul>
