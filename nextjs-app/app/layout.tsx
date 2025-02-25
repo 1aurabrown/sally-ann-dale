@@ -10,7 +10,7 @@ import localFont from 'next/font/local'
 
 import DraftModeToast from "@/app/_components/DraftModeToast";
 import { Footer, FooterProps } from "@/app/_components/Footer";
-import Header from "@/app/_components/Header";
+import { Header, HeaderProps } from "@/app/_components/Header";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { settingsQuery, layoutQuery } from "@/sanity/lib/queries";
@@ -94,7 +94,7 @@ export default async function RootLayout({
             </>
           )}
           <SanityLive onError={handleError} />
-          <Header />
+          <Header {...layout.header as HeaderProps} />
           <main className="">{children}</main>
           <Footer {...layout.footer as FooterProps}/>
         </section>

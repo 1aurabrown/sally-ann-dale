@@ -1,10 +1,18 @@
 'use client'
 
+import ResolvedLink from './ResolvedLink'
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import LogoSvg from './LogoSvg';
 
-export default function Header() {
+
+export type HeaderProps = {
+  nav?: Array<any>;
+};
+
+export function Header({
+  nav,
+}: HeaderProps) {
   const [headerOffset, setHeaderOffset] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [topPosition, setTopPosition] = useState(0);
@@ -41,27 +49,24 @@ export default function Header() {
       
     >
       <div className={`container mx-auto px-4 ${isScrolled ? 'h-full' : ''}`}>
-        <nav className={`flex justify-end items-center ${isScrolled ? 'mb-0' : 'mb-2'}`}>
+        {nav?.length && <nav className={`flex justify-end items-center ${isScrolled ? 'mb-0' : 'mb-2'}`}>
           <div className="flex gap-4">
             <nav className="">
               <ul
                 role="list"
                 className="flex items-center gap-4 md:gap-6 leading-5 text-xl tracking-tight font-normal"
               >
-                <li>
-                  <Link className="" href="/online">
-                    Online
-                  </Link>
-                </li>
-                <li>
-                  <Link className="" href="/offline">
-                    Offline
-                  </Link>
-                </li>
+                {nav.map(navItem => {
+                  return(
+                    <li key={navItem._key}>
+                      <ResolvedLink link={navItem}>{navItem.title}</ResolvedLink>
+                    </li>
+                  )
+                })}
               </ul>
             </nav>
           </div>
-        </nav>
+        </nav>}
         <div 
           className="transform translate-y-[-25px] sm:translate-y-[-20px] md:translate-y-[-23px] xl:translate-y-[-18px]"
           style={{ 

@@ -98,7 +98,9 @@ export type SliderModule = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -119,7 +121,9 @@ export type TextModule = {
     }>;
     style?: "normal";
     listItem?: never;
-    markDefs?: null;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -138,7 +142,9 @@ export type SplitTextModule = {
     }>;
     style?: "normal";
     listItem?: never;
-    markDefs?: null;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -153,7 +159,9 @@ export type SplitTextModule = {
     }>;
     style?: "normal";
     listItem?: never;
-    markDefs?: null;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -184,6 +192,22 @@ export type VideoModule = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
 };
 
 export type HeroModule = {
@@ -208,7 +232,9 @@ export type HeroModule = {
     }>;
     style?: "normal";
     listItem?: never;
-    markDefs?: null;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -222,7 +248,9 @@ export type HeroModule = {
     }>;
     style?: "normal";
     listItem?: never;
-    markDefs?: null;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -238,7 +266,9 @@ export type SimplePortableText = Array<{
   }>;
   style?: "normal";
   listItem?: never;
-  markDefs?: null;
+  markDefs?: Array<{
+    _key: string;
+  } & Link>;
   level?: number;
   _type: "block";
   _key: string;
@@ -344,36 +374,16 @@ export type FooterSettings = {
     _type: "image";
   };
   heading?: string;
-  items?: Array<string>;
+  items?: Array<{
+    heading?: string;
+    description?: string;
+    _type: "offering";
+    _key: string;
+  }>;
   email?: string;
   nav?: Array<{
     _key: string;
   } & Link>;
-};
-
-export type HeaderSettings = {
-  _id: string;
-  _type: "headerSettings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  leftNav?: Array<{
-    _key: string;
-  } & Link>;
-  rightNav?: Array<{
-    _key: string;
-  } & Link>;
-};
-
-export type Redirect = {
-  _id: string;
-  _type: "redirect";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  from: string;
-  to?: string;
-  isPermanent?: boolean;
 };
 
 export type TextPage = {
@@ -659,7 +669,7 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ListModule | SliderModule | TextModule | SplitTextModule | VideoModule | HeroModule | SimplePortableText | ComplexPortableText | Link | Project | FooterSettings | HeaderSettings | Redirect | TextPage | Offline | Online | Homepage | Slug | Site | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ListModule | SliderModule | TextModule | SplitTextModule | VideoModule | HeroModule | SimplePortableText | ComplexPortableText | Link | Project | FooterSettings | TextPage | Offline | Online | Homepage | Slug | Site | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -706,25 +716,14 @@ export type SettingsQueryResult = {
     _type: "image";
   };
   heading?: string;
-  items?: Array<string>;
+  items?: Array<{
+    heading?: string;
+    description?: string;
+    _type: "offering";
+    _key: string;
+  }>;
   email?: string;
   nav?: Array<{
-    _key: string;
-  } & Link>;
-  title: null;
-  URL: null;
-  gtmID: null;
-  seo: null;
-} | {
-  _id: string;
-  _type: "headerSettings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  leftNav?: Array<{
-    _key: string;
-  } & Link>;
-  rightNav?: Array<{
     _key: string;
   } & Link>;
   title: null;
@@ -877,19 +876,6 @@ export type SettingsQueryResult = {
     _type: "row";
     _key: string;
   }>;
-  URL: null;
-  gtmID: null;
-  seo: null;
-} | {
-  _id: string;
-  _type: "redirect";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  from: string;
-  to?: string;
-  isPermanent?: boolean;
-  title: null;
   URL: null;
   gtmID: null;
   seo: null;
@@ -1052,68 +1038,18 @@ export type LayoutQueryResult = {
       _type: "image";
     } | null;
     heading?: string;
-    items?: Array<string>;
+    items?: Array<{
+      heading?: string;
+      description?: string;
+      _type: "offering";
+      _key: string;
+    }>;
     email?: string;
     nav?: Array<{
       _key: string;
     } & Link>;
     leftNav: null;
     rightNav: null;
-  } | {
-    _id: string;
-    _type: "headerSettings";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    leftNav: Array<{
-      _key: string;
-      _type: "link";
-      title?: string;
-      linkType: "page" | "url";
-      page: {
-        type: "homepage";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "offline";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "online";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "textPage";
-        slug: string | null;
-        isHome: false;
-      } | null;
-      url?: string;
-    }> | null;
-    rightNav: Array<{
-      _key: string;
-      _type: "link";
-      title?: string;
-      linkType: "page" | "url";
-      page: {
-        type: "homepage";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "offline";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "online";
-        slug: string | null;
-        isHome: false;
-      } | {
-        type: "textPage";
-        slug: string | null;
-        isHome: false;
-      } | null;
-      url?: string;
-    }> | null;
-    logo: null;
   } | {
     _id: string;
     _type: "homepage";
@@ -1197,18 +1133,6 @@ export type LayoutQueryResult = {
       _type: "row";
       _key: string;
     }>;
-    leftNav: null;
-    rightNav: null;
-    logo: null;
-  } | {
-    _id: string;
-    _type: "redirect";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    from: string;
-    to?: string;
-    isPermanent?: boolean;
     leftNav: null;
     rightNav: null;
     logo: null;
@@ -1306,7 +1230,12 @@ export type LayoutQueryResult = {
     } | null;
     heading: string | null;
     email: string | null;
-    items: Array<string> | null;
+    items: Array<{
+      heading?: string;
+      description?: string;
+      _type: "offering";
+      _key: string;
+    }> | null;
     nav: Array<{
       _key: string;
       _type: "link";
@@ -1334,7 +1263,7 @@ export type LayoutQueryResult = {
   } | null;
 };
 // Variable: homeQuery
-// Query: *[_type == "homepage" && _id ==  "homepage" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...  },  _type == 'videoModule' => {    ...,    image,    video,  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image,  },  _type == 'sliderModule' => {    ...,    items[] {      image,      body    }  }  }}
+// Query: *[_type == "homepage" && _id ==  "homepage" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...  },  _type == 'videoModule' => {    _key,    _type,    image,    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image,  },  _type == 'sliderModule' => {    ...,    items[] {      image,      body    }  }  }}
 export type HomeQueryResult = {
   _id: string;
   _type: "homepage";
@@ -1366,7 +1295,9 @@ export type HomeQueryResult = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -1380,7 +1311,9 @@ export type HomeQueryResult = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -1398,7 +1331,9 @@ export type HomeQueryResult = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -1413,7 +1348,9 @@ export type HomeQueryResult = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -1443,12 +1380,28 @@ export type HomeQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    text: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
   }> | null;
   seo?: Seo;
   isHome: false;
 } | null;
 // Variable: onlineQuery
-// Query: *[_type == "online" && _id ==  "online" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...  },  _type == 'videoModule' => {    ...,    image,    video,  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image,  },  _type == 'sliderModule' => {    ...,    items[] {      image,      body    }  }  }}
+// Query: *[_type == "online" && _id ==  "online" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...  },  _type == 'videoModule' => {    _key,    _type,    image,    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image,  },  _type == 'sliderModule' => {    ...,    items[] {      image,      body    }  }  }}
 export type OnlineQueryResult = {
   _id: string;
   _type: "online";
@@ -1486,7 +1439,9 @@ export type OnlineQueryResult = {
         }>;
         style?: "normal";
         listItem?: never;
-        markDefs?: null;
+        markDefs?: Array<{
+          _key: string;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
@@ -1504,7 +1459,9 @@ export type OnlineQueryResult = {
       }>;
       style?: "normal";
       listItem?: never;
-      markDefs?: null;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -1534,6 +1491,22 @@ export type OnlineQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    text: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
   }> | null;
   seo?: Seo;
   isHome: false;
@@ -1669,9 +1642,9 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_id == \"site\"][0]{\n  ...,\n  title,\n  URL,\n  gtmID,\n  seo{\n    \n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n\n  }\n}": SettingsQueryResult;
     "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  leftNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  rightNav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  logo\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  logo,\n  heading,\n  email,\n  items,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  }\n\n  }\n}": LayoutQueryResult;
-    "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
-    "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    ...,\n    image,\n    video,\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
-    "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]{\n    _key,\n    text,\n    images[]{\n      _key,\n      _type,\n      asset,\n      alt\n    }\n  }\n\n  }\n}": OfflineQueryResult;
+    "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image,\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
+    "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image,\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image,\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
+    "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]\n\n  }\n}": OfflineQueryResult;
     "\n  *[_type == \"textPage\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \"slug\": slug.current\n  }\n": AllTextPagesQueryResult;
     "\n  *[_type == \"textPage\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    title,\n    slug,\n    body[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  page->{\n    \"type\": _type,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n      }\n    },\n    seo{\n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n}\n  }\n": GetTextPageQueryResult;
     "\n  *[_type == \"textPage\" && defined(slug.current)]\n  {\"slug\": slug.current}\n": TextPagesSlugsResult;

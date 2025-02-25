@@ -56,10 +56,7 @@ const footer = `
 // Header
 export const header=`
   ...,
-  leftNav[]{
-    ${link}
-  },
-  rightNav[]{
+  nav[]{
     ${link}
   },
   logo
@@ -72,9 +69,11 @@ export const pageModules = `
     ...
   },
   _type == 'videoModule' => {
-    ...,
+    _key,
+    _type,
     image,
     video,
+    text
   },
   _type == 'textModule' => {
     ...
