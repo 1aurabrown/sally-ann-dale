@@ -181,17 +181,7 @@ export type VideoModule = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  video: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  video: string;
   text?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -381,6 +371,17 @@ export type FooterSettings = {
     _key: string;
   }>;
   email?: string;
+  nav?: Array<{
+    _key: string;
+  } & Link>;
+};
+
+export type HeaderSettings = {
+  _id: string;
+  _type: "headerSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   nav?: Array<{
     _key: string;
   } & Link>;
@@ -669,7 +670,7 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ListModule | SliderModule | TextModule | SplitTextModule | VideoModule | HeroModule | SimplePortableText | ComplexPortableText | Link | Project | FooterSettings | TextPage | Offline | Online | Homepage | Slug | Site | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ListModule | SliderModule | TextModule | SplitTextModule | VideoModule | HeroModule | SimplePortableText | ComplexPortableText | Link | Project | FooterSettings | HeaderSettings | TextPage | Offline | Online | Homepage | Slug | Site | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -723,6 +724,19 @@ export type SettingsQueryResult = {
     _key: string;
   }>;
   email?: string;
+  nav?: Array<{
+    _key: string;
+  } & Link>;
+  title: null;
+  URL: null;
+  gtmID: null;
+  seo: null;
+} | {
+  _id: string;
+  _type: "headerSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   nav?: Array<{
     _key: string;
   } & Link>;
@@ -1070,6 +1084,37 @@ export type LayoutQueryResult = {
     }> | null;
   } | {
     _id: string;
+    _type: "headerSettings";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    nav: Array<{
+      _key: string;
+      _type: "link";
+      title?: string;
+      linkType: "page" | "url";
+      page: {
+        type: "homepage";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "offline";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "online";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "textPage";
+        slug: string | null;
+        isHome: false;
+      } | null;
+      url?: string;
+    }> | null;
+    logo: null;
+  } | {
+    _id: string;
     _type: "homepage";
     _createdAt: string;
     _updatedAt: string;
@@ -1226,6 +1271,35 @@ export type LayoutQueryResult = {
     email: null;
     items: null;
     nav: null;
+  } | {
+    logo: null;
+    heading: null;
+    email: null;
+    items: null;
+    nav: Array<{
+      _key: string;
+      _type: "link";
+      title?: string;
+      linkType: "page" | "url";
+      page: {
+        type: "homepage";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "offline";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "online";
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "textPage";
+        slug: string | null;
+        isHome: false;
+      } | null;
+      url?: string;
+    }> | null;
   } | {
     logo: {
       asset?: {
@@ -1385,17 +1459,7 @@ export type HomeQueryResult = {
       height: number | null;
       aspectRatio: number | null;
     };
-    video: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
+    video: string;
     text: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -1503,17 +1567,7 @@ export type OnlineQueryResult = {
       height: number | null;
       aspectRatio: number | null;
     };
-    video: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
+    video: string;
     text: Array<{
       children?: Array<{
         marks?: Array<string>;
