@@ -49,11 +49,11 @@ export function Header({
       var startScale, startY;
       const viewWidth = window.innerWidth;
       if (viewWidth < 640 ) {
-        startScale = (viewWidth - 80)/ 118
+        startScale = (viewWidth - 100)/ 118
       } else if (viewWidth < 1280 ) {
         startScale = (viewWidth - 40)/ 118
       } else {
-        startScale = 10
+        startScale = 10.15
       }
 
       if (viewWidth < 640 ) {
@@ -115,7 +115,7 @@ export function Header({
 
   return (
       <header
-        className={'w-full h-header sticky px-2 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
+        className={'w-full h-header sticky px-6 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
       >
 
       {isMobile && <div className="z-50">
