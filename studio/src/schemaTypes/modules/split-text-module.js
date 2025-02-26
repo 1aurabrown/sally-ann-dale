@@ -10,23 +10,25 @@ export default {
       title: 'Left Heading',
       name: 'headingLeft',
       type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       title: 'Left Body',
       name: 'bodyLeft',
       type: 'simplePortableText',
-      rows: 5
+      validation: Rule => Rule.required(),
     },
     {
       title: 'Right Heading',
       name: 'headingRight',
       type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       title: 'Right Body',
       name: 'bodyRight',
       type: 'simplePortableText',
-      rows: 5
+      validation: Rule => Rule.required(),
     }
   ],
   preview: {
