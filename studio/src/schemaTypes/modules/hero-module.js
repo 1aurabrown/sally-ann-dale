@@ -9,7 +9,7 @@ export default {
     {
       title: 'Image',
       name: 'image',
-      type: 'image',
+      type: 'image'
     },
     {
       title: 'Heading',

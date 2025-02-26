@@ -33,6 +33,11 @@ export default {
   			        name: 'image',
   			        type: 'image',
   			        max: 2,
+                fields: [{
+                  title: 'Caption',
+                  type: 'string',
+                  name: 'caption'
+                }]
   			      },
             ],
             validation: Rule => Rule.required(),

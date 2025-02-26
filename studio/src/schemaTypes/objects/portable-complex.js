@@ -15,7 +15,12 @@ export default {
     {
       title: 'Image',
       name: 'image',
-      type: 'image'
+      type: 'image',
+      fields: [{
+        title: 'Caption',
+        type: 'string',
+        name: 'caption'
+      }]
     },
     {
       title: 'Block',

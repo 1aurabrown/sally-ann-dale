@@ -65,25 +65,17 @@ export default async function TextPage(props: Props) {
 
   return (
     <>
-      <div className="">
-        <div className="container my-12 lg:my-24">
-          <div>
-            <div className="pb-6 mb-6 border-b border-gray-100">
-              <div className="max-w-3xl">
-                <h2 className="text-24 md:text-36 lg:text-64 font-bold tracking-tight text-gray-900 ">
-                  {page.title}
-                </h2>
-              </div>
-            </div>
-            <article>
-              {page.body?.length && (
-                <PortableText
-                  value={page.body as PortableTextBlock[]}
-                />
-              )}
-            </article>
-          </div>
-        </div>
+      <div className="page-padding max-w-screen-lg mb-10 md:mb-30">
+        <h1 className="header text-24 md:text-36 lg:text-64 my-5 md:my-10">
+          {page.title}
+        </h1>
+        <article>
+          {page.body?.length && (
+            <PortableText
+              value={page.body as PortableTextBlock[]}
+            />
+          )}
+        </article>
       </div>
 
     </>

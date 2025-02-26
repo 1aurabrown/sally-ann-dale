@@ -49,7 +49,7 @@ export function linkResolver(link: Link | undefined) {
       if (link?.page && link.page?.isHome === true) {
         return `/`;
       } else {
-        return link?.page.slug
+        return link?.page?.slug
       }
     default:
       return null;

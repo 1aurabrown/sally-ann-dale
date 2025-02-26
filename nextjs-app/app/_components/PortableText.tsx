@@ -15,6 +15,7 @@ import {
 } from "next-sanity";
 
 import ResolvedLink from "@/app/_components/ResolvedLink";
+import Image from "@/app/_components/Image";
 
 export default function CustomPortableText({
   className,
@@ -25,57 +26,31 @@ export default function CustomPortableText({
 }) {
   const components: PortableTextComponents = {
     block: {
-      h1: ({ children, value }) => (
-        // Add an anchor to the h1
-        <h1 className="group relative">
-          {children}
-          <a
-            href={`#${value?._key}`}
-            className="absolute left-0 top-0 bottom-0 -ml-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              />
-            </svg>
-          </a>
-        </h1>
-      ),
-      h2: ({ children, value }) => {
-        // Add an anchor to the h2
-        return (
-          <h2 className="group relative">
-            {children}
-            <a
-              href={`#${value?._key}`}
-              className="absolute left-0 top-0 bottom-0 -ml-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                />
-              </svg>
-            </a>
-          </h2>
-        );
+      h1: ({ children }: any) => {
+        return <h1 className="header text-24 md:text-36 lg:text-64 mt-10 mb-4">{children}</h1>;
+      },
+      h2: ({ children }: any) => {
+        return <h2 className="header text-24 md:text-36 lg:text-48 mt-10 mb-4">{children}</h2>;
+      },
+      h3: ({ children }: any) => {
+        return <h3 className="header text-19 md:text-24 lg:text-36 mt-10 mb-4">{children}</h3>;
+      },
+      h4: ({ children }: any) => {
+        return <h4 className="font-bold mt-8 mb-2">{children}</h4>;
+      },
+      normal: ({ children }: any) => {
+        return <p className="my-4">{children}</p>;
+      },
+      blockquote: ({ children }: any) => {
+        return <p className="header max-w-lg md:max-w-xl lg:max-w-3xl mx-auto text-24 md:text-36 lg:text-48 text-center leading-tight my-10 md:my-16 lg:my-20">{children}</p>;
+      },
+    },
+    list: {
+      bullet: ({ children }: any) => {
+        return <ul className="list-disc ml-[1.5em] my-[1em]">{children}</ul>;
+      },
+      number: ({ children }: any) => {
+        return <ol className="list-decimal ml-[1.5em] my-[1em]">{children}</ol>;
       },
     },
     marks: {
@@ -83,6 +58,9 @@ export default function CustomPortableText({
         return <ResolvedLink link={link}>{children}</ResolvedLink>;
       },
     },
+    types: {
+      image: ({value}) => <figure className="mx-auto max-w-sm max-w-3/4 my-1/8"> <Image className="w-full" image={value} /> <figcaption className="text-right text-12 mt-thin">{value.caption}</figcaption></figure>,
+    }
   };
 
   return (
