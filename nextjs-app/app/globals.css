@@ -5,9 +5,15 @@
 @layer base {
   body {
     --header-height: 1.75rem;
-    --page-padding: 2.5rem;
+    --page-padding: 1.5rem;
     text-rendering: geometricPrecision;
+    @screen sm {
+      --page-padding: 2.5rem;
+    }
     @screen md {
+      --page-padding: 4rem;
+    }
+    @screen xl {
       --page-padding: 7.5rem;
     }
     @apply text-green font-sans text-16;

@@ -39,7 +39,7 @@ export default function CustomPortableText({
         return <h4 className="font-bold mt-8 mb-2">{children}</h4>;
       },
       normal: ({ children }: any) => {
-        return <p className="my-4">{children}</p>;
+        return <p className="my-4 first:mt-0 last:mb-0">{children}</p>;
       },
       blockquote: ({ children }: any) => {
         return <p className="header max-w-lg md:max-w-xl lg:max-w-3xl mx-auto text-24 md:text-36 lg:text-48 text-center leading-tight my-10 md:my-16 lg:my-20">{children}</p>;

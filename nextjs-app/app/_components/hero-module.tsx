@@ -26,7 +26,7 @@ export default function HeroModule({
       <div className="md:flex md:gap-16 space-y-10 md:space-y-0 mt-12">
         {heading?.length && (
           <div className="md:w-3/5">
-            <h2 className="header text-36 md:text-48 lg:text-64 leading-tight"><PortableText
+            <h2 className="header text-36 lg:text-48 xl:text-64 leading-tight"><PortableText
               value={heading as PortableTextBlock[]}
             /></h2>
           </div>

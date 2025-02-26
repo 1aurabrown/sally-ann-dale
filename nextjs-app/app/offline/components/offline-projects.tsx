@@ -102,24 +102,23 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
 function ProjectRow({images, text}: ProjectRowProps) {
   return (
     <div className="mb-9 md:mb-7 flex-col md:grid md:grid-cols-2">
-        <div className={`space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-11 ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
+        <div className={`flex space-x-4 md:space-x-7 justify-stretch ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
           {images.map((image, index) => {
             const ref = image.asset._ref;
             const dimensions = ref ? ref.split('-')[2].split('x').map(Number) : [1200, 800];
             const [width, height] = dimensions;
             
-            return (
-              <Image
-                key={index}
-                image={image}
-                className="w-full h-full object-cover"
-              />
-            )
+            return <div class="flex-1 relative"><Image
+                  key={index}
+                  className="w-full h-full object-cover"
+                  image={image}
+                /></div>
+
           })}
         </div>
       
       {text?.length && (
-        <div className='mt-5 md:mt-0 md:pl-16'>
+        <div className='mt-4 md:mt-0 md:pl-16'>
           <PortableText value={text as PortableTextBlock[]} />
         </div>
       )}
