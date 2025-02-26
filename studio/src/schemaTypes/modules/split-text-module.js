@@ -10,24 +10,48 @@ export default {
       title: 'Left Heading',
       name: 'headingLeft',
       type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       title: 'Left Body',
       name: 'bodyLeft',
       type: 'simplePortableText',
-      rows: 5
+      validation: Rule => Rule.required(),
+    },
+    {
+      title: 'Left Link',
+      name: 'linkLeft',
+      type: 'array',
+      validation: Rule => Rule.max(1),
+      of: [{
+        title: 'Link',
+        name: 'link',
+        type: 'link'
+      }]
     },
     {
       title: 'Right Heading',
       name: 'headingRight',
       type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       title: 'Right Body',
       name: 'bodyRight',
       type: 'simplePortableText',
-      rows: 5
-    }
+      validation: Rule => Rule.required(),
+    },
+    {
+      title: 'Right Link',
+      name: 'linkRight',
+      type: 'array',
+      validation: Rule => Rule.max(1),
+      of: [{
+        title: 'Link',
+        name: 'link',
+        type: 'link'
+      }]
+    },
   ],
   preview: {
     select: {

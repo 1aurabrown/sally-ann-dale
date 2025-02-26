@@ -47,7 +47,7 @@ export default async function homepagePage(props: Props) {
 
   return (
     <>
-      <article className="max-w-full overflow-hidden grid gap-y-10 md:gap-30 xl:gap-y-55">
+      <article className="max-w-full overflow-hidden grid gap-y-15 md:gap-30 xl:gap-y-55 mb-10 md:mb-30 ">
         <Modules modules={homepage.modules} />
       </article>
     </>

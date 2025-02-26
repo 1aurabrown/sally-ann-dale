@@ -22,7 +22,7 @@ export default function CoverImage(props: ImageProps) {
       className={className}
       width={width || image.width || 500}
       height={height || width * aspectRatio || image.height || 500}
-      alt={stegaClean(image?.alt) || ""}
+      alt={stegaClean(image?.alt) || stegaClean(image?.caption) || ""}
       src={ urlForImage(image)?.auto("format").url() as string }
       sizes={sizes || '100vw'}
       priority={priority}

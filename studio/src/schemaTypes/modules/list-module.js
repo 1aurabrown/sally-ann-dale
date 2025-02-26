@@ -15,7 +15,7 @@ export default {
     {
       title: 'Items',
       name: 'items',
-      type: 'text',
+      type: 'simplePortableText',
       description: 'Enter each item on a new line.',
       validation: Rule => Rule.required(),
     },

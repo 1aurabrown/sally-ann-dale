@@ -15,7 +15,8 @@ export default {
     {
       title: 'Video',
       name: 'video',
-      type: 'image',
+      type: 'string',
+      description: 'Provide a Vimeo video id (eg. x2to0hs)',
       validation: Rule => Rule.required(),
     },
     {

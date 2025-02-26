@@ -1,5 +1,7 @@
 'use client'
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import ResolvedLink from './ResolvedLink'
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -14,7 +16,6 @@ export type HeaderProps = {
 export function Header({
   nav,
 }: HeaderProps) {
-
 
   // Turn these into useState and adjust (especially scale) based on current viewport size.
   const startPercent = .15;
@@ -34,9 +35,8 @@ export function Header({
   const pageType = usePathname();
 
   useEffect(() => {
+    setMobileNavVisible(false)
     const isHomepage = (pageType === '/')
-
-    console.log(isHomepage)
 
     if (!isHomepage) {
       setScale(endScale)
@@ -49,11 +49,11 @@ export function Header({
       var startScale, startY;
       const viewWidth = window.innerWidth;
       if (viewWidth < 640 ) {
-        startScale = (viewWidth - 80)/ 118
+        startScale = (viewWidth - 100)/ 118
       } else if (viewWidth < 1280 ) {
         startScale = (viewWidth - 40)/ 118
       } else {
-        startScale = 10
+        startScale = 10.15
       }
 
       if (viewWidth < 640 ) {
@@ -115,7 +115,7 @@ export function Header({
 
   return (
       <header
-        className={'w-full h-header sticky px-2 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
+        className={'w-full h-header sticky px-6 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
       >
 
       {isMobile && <div className="z-50">
@@ -123,8 +123,20 @@ export function Header({
           className={`relative z-10${mobileNavVisible ? ' text-white' : ''}`}
           onClick={()=>setMobileNavVisible(!mobileNavVisible)}
         >{mobileNavVisible ? '\u2715' : '\u2261'}</button>
-        {mobileNavVisible &&
-          <div className="fixed w-full h-full top-0 left-0 right-0 bottom-0 bg-green">
+
+        <AnimatePresence>
+         {(isMobile && mobileNavVisible) &&
+          <motion.div
+            key="mobileNav"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={{
+              open: { opacity: 1 },
+              closed: { opacity: 0 }
+            }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="fixed w-full h-full top-0 left-0 right-0 bottom-0 bg-green">
             <nav className="">
               <ul
                 role="list"
@@ -139,8 +151,9 @@ export function Header({
                 })}
               </ul>
             </nav>
-          </div>
+          </motion.div>
         }
+        </AnimatePresence>
       </div>}
 
       <div
@@ -155,23 +168,21 @@ export function Header({
         </Link>
       </div>
 
-      {!isMobile && nav?.length && <nav className='flex col-start-3 justify-end items-center'>
-        <div className="flex gap-4">
-          <nav className="">
-            <ul
-              role="list"
-              className="flex items-center gap-4 md:gap-6 leading-5 text-12 tracking-tight font-normal"
-            >
-              {nav.map(navItem => {
-                return(
-                  <li key={navItem._key}>
-                    <ResolvedLink link={navItem}>{navItem.title}</ResolvedLink>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
-        </div>
+
+
+      {!isMobile && nav?.length && <nav className='flex col-start-3 justify-end items-center gap-4'>
+        <ul
+          role="list"
+          className="flex items-center gap-4 md:gap-6 leading-5 text-12 tracking-tight font-normal"
+        >
+          {nav.map(navItem => {
+            return(
+              <li key={navItem._key}>
+                <ResolvedLink link={navItem}>{navItem.title}</ResolvedLink>
+              </li>
+            )
+          })}
+        </ul>
       </nav>}
     </header>
   );

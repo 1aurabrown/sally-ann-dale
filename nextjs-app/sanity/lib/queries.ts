@@ -37,6 +37,7 @@ export const site=`
 const linkReference = /* groq */ `
   page->{
     "type": _type,
+    "title": title,
     "slug": slug.current,
     "isHome": _id==${homeID},
   }
@@ -71,7 +72,13 @@ export const header=`
 // Construct our content "modules" GROQ
 export const pageModules = `
   _type == 'splitTextModule' => {
-    ...
+    ...,
+    linkLeft[]{
+      ${link}
+    },
+    linkRight[]{
+      ${link}
+    }
   },
   _type == 'videoModule' => {
     _key,
