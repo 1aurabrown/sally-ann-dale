@@ -6,7 +6,6 @@ import { homeQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import LogoSvg from './_components/LogoSvg';
 
 
 /**

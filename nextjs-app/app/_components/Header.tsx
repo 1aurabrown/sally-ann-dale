@@ -105,10 +105,11 @@ export function Header({
   }, [pageType]);
 
   useEffect(() => {
+    const scrollingElement = document.scrollingElement as HTMLElement;
     if(mobileNavVisible) {
-      document.scrollingElement.style.overflow = 'hidden'
+      scrollingElement.style.overflow = 'hidden'
     } else {
-      document.scrollingElement.style.overflow = ''
+      scrollingElement.style.overflow = ''
     }
   }, [mobileNavVisible])
 
@@ -147,13 +148,10 @@ export function Header({
         style={{transform: `translateY(${translateY}px)` }}
       >
         <Link
-          className={`origin-top block ${logoVisible ? '' : 'hidden'}`}
+          className={`origin-top text-black block ${logoVisible ? '' : 'hidden'}`}
           style={{transform: `scale(${scale})`}}
           href="/">
-          <LogoSvg
-            className="block w-30"
-            color="#000000"
-          />
+          <LogoSvg />
         </Link>
       </div>
 

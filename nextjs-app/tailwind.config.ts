@@ -64,7 +64,7 @@ export default {
       padding: "2rem",
     },
     lineHeight: {
-      tight: 1.1,
+      tight: '1.1',
     },
     colors: {
       transparent: 'transparent',

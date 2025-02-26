@@ -6,6 +6,7 @@ type SliderModuleProps = {
   _type: string;
   items: {
     image: any;
+    heading: string;
     body: PortableTextBlock[];
   }[];
 };

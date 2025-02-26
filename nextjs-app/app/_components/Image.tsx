@@ -3,18 +3,18 @@ import { Image } from "next-sanity/image";
 
 import { urlForImage } from "@/sanity/lib/utils";
 
-interface CoverImageProps {
+interface ImageProps {
   image: any;
-  width: number;
-  height: number;
-  aspectRatio: number;
+  width?: number;
+  height?: number;
+  aspectRatio?: number;
   sizes?: string;
   priority?: boolean;
   className?: string;
   objectFit?: 'cover' | 'contain';
 }
 
-export default function CoverImage(props: CoverImageProps) {
+export default function CoverImage(props: ImageProps) {
   const { image, width, height, aspectRatio, sizes, priority, className, objectFit = 'contain' } = props;
 
   const img = image ? (
