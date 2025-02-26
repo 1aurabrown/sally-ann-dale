@@ -16,6 +16,7 @@ export default {
       title: 'Content Rows',
       name: 'rows',
       type: 'array',
+      validation: Rule => Rule.max(3),
       of: [{
         title: 'Row',
         name: 'row',

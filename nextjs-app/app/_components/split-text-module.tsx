@@ -1,10 +1,13 @@
 import { type PortableTextBlock } from "next-sanity";
 import PortableText from "@/app/_components/PortableText";
+import ResolvedLink from './ResolvedLink'
 
 type SplitTextModuleProps = {
   _type: string;
   headingLeft: string;
   headingRight: string
+  linkLeft?: array<any>;
+  linkRight?: array<any>;
   bodyLeft: PortableTextBlock[];
   bodyRight: PortableTextBlock[];
 };
@@ -13,6 +16,8 @@ export default function SplitTextModule ({
   _type,
   headingLeft,
   headingRight,
+  linkLeft,
+  linkRight,
   bodyLeft,
   bodyRight
 }: SplitTextModuleProps) {
@@ -21,13 +26,15 @@ export default function SplitTextModule ({
     <section className="page-padding lg:grid lg:grid-cols-5 items-center">
       {/* Left Column - 2/5 width */}
       <div className="lg:col-span-2 space-y-8">
-        <div>
+        <div className="relative">
           <h3 className="header text-36 md:text-48 lg:text-64">{headingLeft}</h3>
           {bodyLeft?.length && (
             <PortableText
               value={bodyLeft as PortableTextBlock[]}
             />
           )}
+          {linkLeft?.length && <ResolvedLink className='absolute inset-0 z-10' link={linkLeft[0]} title={linkLeft[0].title || linkLeft[0].page?.title}></ResolvedLink> }
+
         </div>
       </div>
 
@@ -42,13 +49,15 @@ export default function SplitTextModule ({
 
       {/* Right Column - 2/5 width */}
       <div className="lg:col-span-2 space-y-8 mt-10 lg:mt-0">
-        <div>
+        <div className="relative">
           <h3 className="header text-36 md:text-48 lg:text-64">{headingRight}</h3>
           {bodyRight?.length && (
             <PortableText
               value={bodyRight as PortableTextBlock[]}
             />
           )}
+          {linkRight?.length && <ResolvedLink className='absolute inset-0 z-10' link={linkRight[0]} title={linkRight[0].title || linkRight[0].page?.title}></ResolvedLink> }
+
         </div>
       </div>
     </section>

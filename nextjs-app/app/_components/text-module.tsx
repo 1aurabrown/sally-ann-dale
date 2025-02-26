@@ -15,7 +15,7 @@ export default function TextModule ({
     <section className="page-padding first:pt-10 first:md:pt-20 first:lg:pt-40">
       {body?.length && (
         <PortableText
-          className="header text-24 leading-tight text-center md:text-48 lg:text-64"
+          className="header text-24 leading-tight text-center md:text-36 lg:text-64"
           value={body as PortableTextBlock[]}
         />
       )}

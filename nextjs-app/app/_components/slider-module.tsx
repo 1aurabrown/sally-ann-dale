@@ -17,7 +17,6 @@ export default function SliderModule ({
 }: SliderModuleProps) {
   if (_type != 'sliderModule') return
 
-    console.log(items)
   return (
     <section className="flex page-padding space-x-4">
       { items.length && items.map((item, i) => (

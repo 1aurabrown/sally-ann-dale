@@ -19,6 +19,17 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      title: 'Left Link',
+      name: 'linkLeft',
+      type: 'array',
+      validation: Rule => Rule.max(1),
+      of: [{
+        title: 'Link',
+        name: 'link',
+        type: 'link'
+      }]
+    },
+    {
       title: 'Right Heading',
       name: 'headingRight',
       type: 'string',
@@ -29,7 +40,18 @@ export default {
       name: 'bodyRight',
       type: 'simplePortableText',
       validation: Rule => Rule.required(),
-    }
+    },
+    {
+      title: 'Right Link',
+      name: 'linkRight',
+      type: 'array',
+      validation: Rule => Rule.max(1),
+      of: [{
+        title: 'Link',
+        name: 'link',
+        type: 'link'
+      }]
+    },
   ],
   preview: {
     select: {

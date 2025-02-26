@@ -19,7 +19,7 @@ export function Footer({
   items,
 }: FooterProps) {
   return (
-    <footer className="bg-green mt-9 md:mt-30 py-9 md:pt-20 lg:pt-30 md:pb-20">
+    <footer className="bg-green py-9 md:pt-20 lg:pt-30 md:pb-20">
         <div className="text-white">
           <div className="page-padding">
             <h5 className="pt-12">{heading}</h5>

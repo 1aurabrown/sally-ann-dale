@@ -71,7 +71,22 @@ export type Geopoint = {
 export type ListModule = {
   _type: "listModule";
   heading: string;
-  items: string;
+  items: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      _key: string;
+    } & Link>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
 };
 
 export type SliderModule = {
@@ -132,8 +147,8 @@ export type TextModule = {
 
 export type SplitTextModule = {
   _type: "splitTextModule";
-  headingLeft?: string;
-  bodyLeft?: Array<{
+  headingLeft: string;
+  bodyLeft: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -149,8 +164,8 @@ export type SplitTextModule = {
     _type: "block";
     _key: string;
   }>;
-  headingRight?: string;
-  bodyRight?: Array<{
+  headingRight: string;
+  bodyRight: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -1408,8 +1423,8 @@ export type HomeQueryResult = {
   } | {
     _key: string;
     _type: "splitTextModule";
-    headingLeft?: string;
-    bodyLeft?: Array<{
+    headingLeft: string;
+    bodyLeft: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -1425,8 +1440,8 @@ export type HomeQueryResult = {
       _type: "block";
       _key: string;
     }>;
-    headingRight?: string;
-    bodyRight?: Array<{
+    headingRight: string;
+    bodyRight: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -1494,7 +1509,22 @@ export type OnlineQueryResult = {
     _key: string;
     _type: "listModule";
     heading: string;
-    items: string;
+    items: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
   } | {
     _key: string;
     _type: "sliderModule";

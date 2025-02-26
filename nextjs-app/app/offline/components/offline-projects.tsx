@@ -101,7 +101,7 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
 
 function ProjectRow({images, text}: ProjectRowProps) {
   return (
-    <div className="mb-8 flex-col space-y-2 md:space-y-0 md:grid md:grid-cols-2">
+    <div className="mb-9 md:mb-7 flex-col md:grid md:grid-cols-2">
         <div className={`space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-11 ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
           {images.map((image, index) => {
             const ref = image.asset._ref;
@@ -119,7 +119,7 @@ function ProjectRow({images, text}: ProjectRowProps) {
         </div>
       
       {text?.length && (
-        <div className='mt-4 md:mt-0 md:pl-16'>
+        <div className='mt-5 md:mt-0 md:pl-16'>
           <PortableText value={text as PortableTextBlock[]} />
         </div>
       )}
