@@ -82,10 +82,6 @@ export default async function RootLayout({
 
   const { isEnabled: isDraftMode } = await draftMode();
 
-
-
-
-
   return (
     <html lang="en" className={`${circularFont.variable} ${louiseDisplay.variable} bg-white text-black`}>
       <body>

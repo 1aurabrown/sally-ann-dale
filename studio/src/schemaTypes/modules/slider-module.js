@@ -1,4 +1,4 @@
-import { Slideshow } from "@phosphor-icons/react"
+import { Slideshow, Image } from "@phosphor-icons/react"
 
 export default {
   title: 'Slider',
@@ -14,6 +14,7 @@ export default {
         title: 'SliderItem',
         name: 'sliderItem',
         type: 'object',
+        icon: Image,
         fields: [
           {
             title: 'Image',
@@ -33,23 +34,28 @@ export default {
             type: 'simplePortableText',
             validation: Rule => Rule.required(),
           },
-        ]
-      }],
-      preview: {
-        select: {
-          heading: 'heading',
-          image: 'image'
-        },
-        prepare({ heading, image }) {
-          return {
-            media: image,
-            title: 'Hero Module',
-            subtitle: heading
+        ],
+        preview: {
+          select: {
+            title: 'heading',
+            body: 'body',
+            image: 'image'
+          },
+
+          prepare({ image, title, body }) {
+            const block = (body || []).find(block => block._type === 'block')
+            return {
+              media: image,
+              title: title,
+              subtitle: block.children
+                .filter(child => child._type === 'span')
+                .map(span => span.text)
+                .join('')
+            }
           }
         }
-      }
+      }]
     },
-
   ],
   preview: {
     select: {
@@ -57,7 +63,7 @@ export default {
     },
     prepare({ items }) {
       return {
-        media: items[0].image,
+        media: items[0].image || Slideshow,
         title: 'Slider Module',
         subtitle: items.map(i => i.heading).join(' / ')
       }

@@ -35,7 +35,19 @@ export default {
             name: 'description',
             type: 'string',
           }
-        ]
+        ],
+        preview: {
+          select: {
+            heading: 'heading',
+            description: 'description'
+          },
+          prepare({ heading, description }) {
+            return {
+              title: heading,
+              subtitle: description
+            }
+          }
+        }
       }]
     },
     {

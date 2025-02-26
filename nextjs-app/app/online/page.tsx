@@ -47,11 +47,9 @@ export default async function OnlinePage(props: Props) {
 
   return (
     <>
-      <div className="container my-12 lg:my-24 grid gap-12">
-        <article className="max-w-full overflow-hidden grid gap-y-6">
-          <Modules modules={online.modules} />
-        </article>
-      </div>
+      <article className="max-w-full overflow-hidden grid gap-y-10 md:gap-30 xl:gap-y-55">
+        <Modules modules={online.modules} />
+      </article>
     </>
   );
 }

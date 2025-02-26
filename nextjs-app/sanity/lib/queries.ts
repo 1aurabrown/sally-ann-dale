@@ -98,8 +98,9 @@ export const pageModules = `
     ...,
     items[] {
       image {
-      ${image}
+        ${image}
       },
+      heading,
       body
     }
   }

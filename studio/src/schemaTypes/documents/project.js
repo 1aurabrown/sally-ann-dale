@@ -1,4 +1,4 @@
-import { PaintBrush } from "@phosphor-icons/react"
+import { PaintBrush, Rows } from "@phosphor-icons/react"
 
 export default {
   title: 'Project',
@@ -19,6 +19,7 @@ export default {
       of: [{
         title: 'Row',
         name: 'row',
+        icon: Rows,
         type: 'object',
         fields: [
         	{
@@ -50,8 +51,8 @@ export default {
         prepare({ text, images }) {
           const block = (text || []).find(block => block._type === 'block')
           return {
-            media: images[0],
-            title: 'Slider Module',
+            media: images?.length ? images[0] : null,
+            title: 'Project Content Row',
             subtitle: block.children
                 .filter(child => child._type === 'span')
                 .map(span => span.text)
@@ -70,7 +71,7 @@ export default {
     },
     prepare({ title, rows }) {
       return {
-        media: rows[0].images[0],
+        media: (rows?.length && rows[0].images?.length) ? rows[0].images[0] : null,
         title: 'Project',
         subtitle: title,
       }
