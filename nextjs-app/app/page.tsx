@@ -48,18 +48,9 @@ export default async function homepagePage(props: Props) {
 
   return (
     <>
-      <main className="container mx-auto px-4">
-        <div className="container my-12 lg:mb-24 grid gap-12">
-          <div className="flex justify-center">
-            {/* Logo div removed from here */}
-          </div>
-          <div className="">
-            <article className="max-w-full overflow-hidden grid gap-y-6">
-              <Modules modules={homepage.modules} />
-            </article>
-          </div>
-        </div>
-      </main>
+      <article className="max-w-full overflow-hidden grid gap-y-10 md:gap-30 xl:gap-y-55">
+        <Modules modules={homepage.modules} />
+      </article>
     </>
   );
 }

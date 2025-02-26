@@ -14,8 +14,7 @@ export default function ListModule ({
 
   return (
     <section>
-      <h2 className="text-3xl">List Module</h2>
-      <h3 className="text-2xl">{heading}</h3>
+      <h3 className="text-25 md:text-36 text-64">{heading}</h3>
       { listItems.length && (
         <ul className="columns-3">
           { listItems.map((item, i) => {

@@ -50,11 +50,9 @@ export default async function OfflinePage(props: Props) {
 
   return (
     <>
-      <div className="pt-[200px] md:pt-[250px] container my-12 grid gap-12">
-        <article className="max-w-full overflow-hidden grid gap-y-6">
-        	<OfflineProjects projects={offline.projects} />
-        </article>
-      </div>
+      <article className="mt-10 lg:mt-18">
+      	<OfflineProjects projects={offline.projects} />
+      </article>
     </>
   );
 }

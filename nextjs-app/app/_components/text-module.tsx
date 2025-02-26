@@ -13,9 +13,9 @@ export default function TextModule ({
   if (_type != 'textModule') return
   return (
     <section>
-      <h2 className="text-3xl">Text Module</h2>
       {body?.length && (
         <PortableText
+          className="header text-24 leading-tight text-center md:text-48 lg:text-64"
           value={body as PortableTextBlock[]}
         />
       )}

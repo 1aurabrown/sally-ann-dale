@@ -18,6 +18,11 @@ const seo =`
   shareGraphic
 `
 
+const image = `
+  ...,
+  "width": asset->metadata.dimensions.width,
+  "height": asset->metadata.dimensions.height,
+  "aspectRatio": asset->metadata.dimensions.aspectRatio,`
 // Site
 export const site=`
   ...,
@@ -71,7 +76,9 @@ export const pageModules = `
   _type == 'videoModule' => {
     _key,
     _type,
-    image,
+    image {
+      ${image}
+    },
     video,
     text
   },
@@ -83,12 +90,16 @@ export const pageModules = `
   },
   _type == 'heroModule' => {
     ...,
-    image,
+    image {
+      ${image}
+    },
   },
   _type == 'sliderModule' => {
     ...,
     items[] {
-      image,
+      image {
+      ${image}
+      },
       body
     }
   }
@@ -111,10 +122,7 @@ export const project = `
     _key,
     text,
     images[]{
-      _key,
-      _type,
-      asset,
-      alt
+      ${image}
     }
   }
 `

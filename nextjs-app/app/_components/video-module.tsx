@@ -17,10 +17,11 @@ export default function VideoModule({
 }: TextModuleProps) {
   if (_type != 'videoModule') return;
   return (
-    <section className="my-24">
-      {video && <Image className="bg-green" image={video}/>}
+    <section>
+      {video && <Image className="bg-green w-full" image={video}/>}
       {text?.length && (
         <PortableText
+          className="px-10 mt-3"
           value={text as PortableTextBlock[]}
         />
       )}

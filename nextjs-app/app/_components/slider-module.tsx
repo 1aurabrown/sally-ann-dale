@@ -17,10 +17,10 @@ export default function SliderModule ({
   if (_type != 'sliderModule') return
   return (
     <section>
-      <h2 className="text-2xl">Slider Module</h2>
       { items.length && items.map((item, i) => (
         <div className="mt-2" key={i}>
           {item.image && <Image image={item.image} />}
+          {item.heading && <h2 class="header text-25 md:text-35 lg:text-48"></h2>}
           {item.body?.length && (
             <PortableText
               value={item.body as PortableTextBlock[]}
