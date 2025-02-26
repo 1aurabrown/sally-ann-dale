@@ -4,12 +4,25 @@
 
 @layer base {
   body {
-    @apply text-green font-sans;
+    --header-height: 1.75rem;
+    --page-padding: 2.5rem;
+    text-rendering: geometricPrecision;
+    @screen md {
+      --page-padding: 7.5rem;
+    }
+    @apply text-green font-sans text-16;
   }
 }
 
 @layer components {
   .header {
-    @apply font-louise text-green;
+    @apply font-serif text-green text-12;
+  }
+}
+
+@layer utilities {
+  .page-padding {
+    padding-left: var(--page-padding);
+    padding-right: var(--page-padding);
   }
 }

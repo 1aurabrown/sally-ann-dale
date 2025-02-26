@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import LogoSvg from './LogoSvg';
 
+import { usePathname } from "next/navigation";
 
 export type HeaderProps = {
   nav?: Array<any>;
@@ -13,48 +14,121 @@ export type HeaderProps = {
 export function Header({
   nav,
 }: HeaderProps) {
+
+
+  // Turn these into useState and adjust (especially scale) based on current viewport size.
+  const startPercent = .15;
+  const endPercent = .5;
+
+  const endScale = 1;
+  const endY = 0;
+
   const [headerOffset, setHeaderOffset] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [topPosition, setTopPosition] = useState(0);
-  const [transitionProgress, setTransitionProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileNavVisible, setMobileNavVisible] = useState(false);
+  const [whiteBackground, setWhiteBackground] = useState(false);
+  const [translateY, setTranslateY] = useState(endY);
+  const [scale, setScale] = useState(endScale);
+  const [logoVisible, setLogoVisible] = useState(false);
+
+  const pageType = usePathname();
 
   useEffect(() => {
+    const isHomepage = (pageType === '/')
+
+    console.log(isHomepage)
+
+    if (!isHomepage) {
+      setScale(endScale)
+      setTranslateY(endY)
+      setWhiteBackground(true)
+      setLogoVisible(true)
+    }
+
     const handleScroll = () => {
-      const viewportHeight = window.innerHeight;
-      const scrollPercent = window.scrollY / viewportHeight;
-      
-      if (scrollPercent < 0.001) {  // No scroll
-        setIsScrolled(false);
-        setTransitionProgress(0);
-      } else if (scrollPercent > 0.15) {  // Full transition
-        setIsScrolled(true);
-        setTransitionProgress(1);
+      var startScale, startY;
+      const viewWidth = window.innerWidth;
+      if (viewWidth < 640 ) {
+        startScale = (viewWidth - 80)/ 118
+      } else if (viewWidth < 1280 ) {
+        startScale = (viewWidth - 40)/ 118
       } else {
-        // Smooth transition from start
-        const progress = scrollPercent / 0.15;
-        setTransitionProgress(progress);
-        setIsScrolled(progress > 0.5);
+        startScale = 10
       }
+
+      if (viewWidth < 640 ) {
+        setIsMobile(true)
+        startY = -8
+      } else {
+        setIsMobile(false)
+        setMobileNavVisible(false)
+        startY = startScale * 8
+      }
+
+
+      const scrollPercent = window.scrollY / window.innerHeight;
+
+      // Before Start
+      if (scrollPercent <= startPercent) {
+        setTranslateY(startY)
+        setScale(startScale)
+        setWhiteBackground(false)
+
+      // After End
+      } else if (scrollPercent >= endPercent) {
+        setTranslateY(endY)
+        setScale(endScale)
+        setWhiteBackground(true)
+
+        // During Transition
+      } else {
+
+        var progress = Math.max(0, Math.min(1, (scrollPercent - startPercent) / (endPercent - startPercent) ));
+
+        setWhiteBackground(progress >= 1);
+        setTranslateY((endY - startY) * progress + startY)
+        setScale((endScale - startScale) * progress + startScale)
+      }
+      setLogoVisible(true)
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (isHomepage) {
+      window.addEventListener('resize', handleScroll);
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [pageType]);
+
+  useEffect(() => {
+    const scrollingElement = document.scrollingElement as HTMLElement;
+    if(mobileNavVisible) {
+      scrollingElement.style.overflow = 'hidden'
+    } else {
+      scrollingElement.style.overflow = ''
+    }
+  }, [mobileNavVisible])
 
   return (
-    <header 
-      className={`mt-[-50px] w-full fixed left-0 z-50 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm py-4 h-15' : 'pt-5'
-      }`}
-      
-    >
-      <div className={`container mx-auto px-4 ${isScrolled ? 'h-full' : ''}`}>
-        {nav?.length && <nav className={`flex justify-end items-center ${isScrolled ? 'mb-0' : 'mb-2'}`}>
-          <div className="flex gap-4">
+      <header
+        className={'w-full h-header sticky px-2 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
+      >
+
+      {isMobile && <div className="z-50">
+        <button
+          className={`relative z-10${mobileNavVisible ? ' text-white' : ''}`}
+          onClick={()=>setMobileNavVisible(!mobileNavVisible)}
+        >{mobileNavVisible ? '\u2715' : '\u2261'}</button>
+        {mobileNavVisible &&
+          <div className="fixed w-full h-full top-0 left-0 right-0 bottom-0 bg-green">
             <nav className="">
               <ul
                 role="list"
-                className="flex items-center gap-4 md:gap-6 leading-5 text-xl tracking-tight font-normal"
+                className="font-serif text-white text-48 py-10 px-4"
               >
                 {nav.map(navItem => {
                   return(
@@ -66,26 +140,39 @@ export function Header({
               </ul>
             </nav>
           </div>
-        </nav>}
-        <div 
-          className="transform translate-y-[-25px] sm:translate-y-[-20px] md:translate-y-[-23px] xl:translate-y-[-18px]"
-          style={{ 
-            '--scroll-progress': transitionProgress,
-            '--translate-y': 'var(--tw-translate-y)',
-            transform: `translateY(calc(var(--scroll-progress) * var(--translate-y)))`
-          } as React.CSSProperties}
-        >
-          <Link href="/">
-            <LogoSvg 
-              width="100%" 
-              minWidth={118.5} 
-              color="#000000"
-              viewBoxWidth="100%"
-              viewBoxHeight={126} 
-            />
-          </Link>
-        </div>
+        }
+      </div>}
+
+      <div
+        className="col-start-2"
+        style={{transform: `translateY(${translateY}px)` }}
+      >
+        <Link
+          className={`origin-top text-black block ${logoVisible ? '' : 'hidden'}`}
+          style={{transform: `scale(${scale})`}}
+          href="/">
+          <LogoSvg />
+        </Link>
       </div>
+
+      {!isMobile && nav?.length && <nav className='flex col-start-3 justify-end items-center'>
+        <div className="flex gap-4">
+          <nav className="">
+            <ul
+              role="list"
+              className="flex items-center gap-4 md:gap-6 leading-5 text-12 tracking-tight font-normal"
+            >
+              {nav.map(navItem => {
+                return(
+                  <li key={navItem._key}>
+                    <ResolvedLink link={navItem}>{navItem.title}</ResolvedLink>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        </div>
+      </nav>}
     </header>
   );
 }

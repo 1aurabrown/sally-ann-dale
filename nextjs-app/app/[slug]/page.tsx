@@ -70,7 +70,7 @@ export default async function TextPage(props: Props) {
           <div>
             <div className="pb-6 mb-6 border-b border-gray-100">
               <div className="max-w-3xl">
-                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+                <h2 className="text-24 md:text-36 lg:text-64 font-bold tracking-tight text-gray-900 ">
                   {page.title}
                 </h2>
               </div>

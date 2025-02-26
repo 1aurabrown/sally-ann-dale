@@ -3,36 +3,33 @@ import { Image } from "next-sanity/image";
 
 import { urlForImage } from "@/sanity/lib/utils";
 
-interface CoverImageProps {
+interface ImageProps {
   image: any;
+  width?: number;
+  height?: number;
+  aspectRatio?: number;
+  sizes?: string;
   priority?: boolean;
   className?: string;
   objectFit?: 'cover' | 'contain';
 }
 
-export default function CoverImage(props: CoverImageProps) {
-  const { image: source, priority, className, objectFit = 'contain' } = props;
+export default function CoverImage(props: ImageProps) {
+  const { image, width, height, aspectRatio, sizes, priority, className, objectFit = 'contain' } = props;
 
-  const image = source?.asset?._ref ? (
+  const img = image ? (
     <Image
-      className={`object-${objectFit} ${className || ''}`}
-      fill={true}
-      alt={stegaClean(source?.alt) || ""}
-      src={
-        urlForImage(source)
-          ?.auto("format")
-          .url() as string
-      }
-      sizes="100vw"
+      className={className}
+      width={width || image.width || 500}
+      height={height || width * aspectRatio || image.height || 500}
+      alt={stegaClean(image?.alt) || ""}
+      src={ urlForImage(image)?.auto("format").url() as string }
+      sizes={sizes || '100vw'}
       priority={priority}
     />
   ) : (
     <div className="bg-slate-50" style={{ paddingTop: "100%" }} />
   );
 
-  return (
-    <div className="relative w-full h-full">
-      {image}
-    </div>
-  );
+  return img;
 }

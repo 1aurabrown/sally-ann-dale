@@ -12,10 +12,10 @@ export default function TextModule ({
 }: TextModuleProps) {
   if (_type != 'textModule') return
   return (
-    <section>
-      <h2 className="text-3xl">Text Module</h2>
+    <section className="page-padding py-10 md:py-20 lg:py-40">
       {body?.length && (
         <PortableText
+          className="header text-24 leading-tight text-center md:text-48 lg:text-64"
           value={body as PortableTextBlock[]}
         />
       )}

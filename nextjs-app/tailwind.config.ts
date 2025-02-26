@@ -63,6 +63,9 @@ export default {
       center: true,
       padding: "2rem",
     },
+    lineHeight: {
+      tight: '1.1',
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -73,7 +76,20 @@ export default {
     },
     fontFamily: {
       sans: ["var(--font-circular)", 'sans-serif'],
-      louise: ['var(--font-louise)', 'serif'],
+      serif: ['var(--font-serif)', 'serif'],
+    },
+    fontSize: {
+      '8': '0.5rem',
+      '10': '0.625rem',
+      '12': '0.75rem',
+      '14': '0.875rem',
+      '16': '1rem',
+      '19': '1.1875rem',
+      '22': '1.375rem',
+      '24': '1.5rem',
+      '36': '2.25rem',
+      '48': '3rem',
+      '64': '4rem'
     },
     extend: {
       spacing: spacing,

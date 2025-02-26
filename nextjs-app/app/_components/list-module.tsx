@@ -13,11 +13,10 @@ export default function ListModule ({
   const listItems = items?.split("\n")
 
   return (
-    <section>
-      <h2 className="text-3xl">List Module</h2>
-      <h3 className="text-2xl">{heading}</h3>
+    <section className="page-padding">
+      <h3 className="header text-36 md:text-48 lg:text-64">{heading}</h3>
       { listItems.length && (
-        <ul className="columns-3">
+        <ul className="sm:columns-2 lg:columns-3 sm:ml-1/3 lg:ml-1/4">
           { listItems.map((item, i) => {
             return (
               <li key={i}>

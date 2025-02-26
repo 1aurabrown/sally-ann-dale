@@ -61,7 +61,7 @@ const inter = Inter({
 
 const louiseDisplay = localFont({
   src: '../public/fonts/LouizeDisplay-Regular-205TF.woff2',  // Go up one level from app/ to reach nextjs-app/
-  variable: '--font-louise'
+  variable: '--font-serif'
 })
 
 const circularFont = localFont({
@@ -95,7 +95,7 @@ export default async function RootLayout({
           )}
           <SanityLive onError={handleError} />
           <Header {...layout.header as HeaderProps} />
-          <main className="">{children}</main>
+          <main className="max-w-screen-2xl mx-auto">{children}</main>
           <Footer {...layout.footer as FooterProps}/>
         </section>
         <SpeedInsights />

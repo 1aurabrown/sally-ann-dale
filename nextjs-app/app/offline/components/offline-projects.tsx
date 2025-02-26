@@ -29,7 +29,7 @@ export type OfflineProjectsProps = {
 export function OfflineProjects({
   projects
 }: OfflineProjectsProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | false>(false);
 
   return (
     <section className="">
@@ -51,28 +51,22 @@ export function OfflineProjects({
 function OfflineProject({ i, project, openIndex, setOpenIndex }: {
   i: number;
   project: ProjectProps;
-  openIndex: number | null;
-  setOpenIndex: (index: number | null) => void;
+  openIndex: number | false;
+  setOpenIndex: (index: number | false) => void;
 }) {
   const isOpen = i === openIndex;
 
   return (
     <>
       <motion.header
-        className={`border-t border-black py-4 w-full header text-4xl flex justify-between items-center ${!isOpen ? 'cursor-pointer hover:text-green' : ''}`}
+        className='page-padding md:px-10 lg:px-18 w-full border-t border-black py-4 w-full header text-24 lg:text-36 hover:text-green flex justify-between items-center cursor-pointer hover:text-green'
         initial={false}
-        onClick={() => !isOpen && setOpenIndex(i)}
+        onClick={()=>setOpenIndex(isOpen ? false : i)}
       >
         <span>
           {project.title}
         </span>
-        <span 
-          className="header text-4xl cursor-pointer hover:text-green"
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpenIndex(isOpen ? null : i);
-          }}
-        >
+        <span>
           {isOpen ? '−' : '+'}
         </span>
       </motion.header>
@@ -80,8 +74,8 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
         {isOpen && (
           <motion.section
             style={{ overflow: 'hidden' }}
-            className=""
             key="content"
+            className="page-padding md:px-10 lg:px-18"
             initial="collapsed"
             animate="open"
             exit="collapsed"
@@ -89,9 +83,9 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
               open: { opacity: 1, height: "auto" },
               collapsed: { opacity: 0, height: 0 }
             }}
-            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <div className="py-8">
+            <div className="pb-4">
               {project.rows?.length && project.rows.map((row) => {
                 return(<ProjectRow key={row._key} {...row} />)
               })}
@@ -107,36 +101,25 @@ function OfflineProject({ i, project, openIndex, setOpenIndex }: {
 
 function ProjectRow({images, text}: ProjectRowProps) {
   return (
-    <div className="flex mb-8 flex-col md:flex-row md:gap-8">
-      <div className={`${images.length > 1 ? 'md:w-2/3' : 'md:w-1/3'}`}>
-        <ul className={`space-y-4 md:space-y-0 md:flex md:gap-8 ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
+    <div className="mb-8 flex-col space-y-2 md:space-y-0 md:grid md:grid-cols-2">
+        <div className={`space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-11 ${images.length === 1 ? 'md:justify-center' : 'md:w-full'}`}>
           {images.map((image, index) => {
             const ref = image.asset._ref;
             const dimensions = ref ? ref.split('-')[2].split('x').map(Number) : [1200, 800];
             const [width, height] = dimensions;
             
             return (
-              <li key={image._key} 
-                className="relative"
-                style={{ 
-                  width: width / 2, 
-                  height: height / 2,
-                  flex: images.length > 1 ? '1 1 auto' : '0 0 auto'
-                }}
-              >
-                <Image 
-                  image={image} 
-                  className="h-full"
-                  objectFit="cover"
-                />
-              </li>
+              <Image
+                key={index}
+                image={image}
+                className="w-full h-full object-cover"
+              />
             )
           })}
-        </ul>
-      </div>
+        </div>
       
       {text?.length && (
-        <div className={`mt-4 md:mt-0 ${images.length > 1 ? 'md:w-1/3' : 'md:w-2/3'}`}>
+        <div className='mt-4 md:mt-0 md:pl-16'>
           <PortableText value={text as PortableTextBlock[]} />
         </div>
       )}
