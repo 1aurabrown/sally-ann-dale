@@ -20,8 +20,7 @@ export default function ResolvedLink({
 
   const resolvedLink = linkResolver(link);
   if (typeof resolvedLink === "string") {
-    var link =  (
-      <Link
+    return <Link
         title={title}
         href={resolvedLink}
         target={link?.openInNewTab ? "_blank" : undefined}
@@ -30,8 +29,6 @@ export default function ResolvedLink({
       >
         {children}
       </Link>
-    );
-    return link;
   }
   return <>{children}</>;
 }
