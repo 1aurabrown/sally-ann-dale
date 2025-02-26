@@ -21,7 +21,7 @@ export default function SliderModule ({
     <section className="flex page-padding space-x-4">
       { items.length && items.map((item, i) => (
         <div className="mt-2" key={i}>
-          {item.image && <figure class="relative">
+          {item.image && <figure className="relative">
             <Image className="w-full" image={item.image} />
             {item.image.caption && <figcaption className="absolute right-0 text-right text-12 mt-thin">{item.image.caption}</figcaption>}
           </figure>}

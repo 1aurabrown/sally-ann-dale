@@ -4,7 +4,7 @@ import { linkResolver } from "@/sanity/lib/utils";
 
 interface ResolvedLinkProps {
   link: any;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   title?: string
 }

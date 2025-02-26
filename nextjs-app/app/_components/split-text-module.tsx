@@ -6,8 +6,8 @@ type SplitTextModuleProps = {
   _type: string;
   headingLeft: string;
   headingRight: string
-  linkLeft?: array<any>;
-  linkRight?: array<any>;
+  linkLeft?: Array<any>;
+  linkRight?: Array<any>;
   bodyLeft: PortableTextBlock[];
   bodyRight: PortableTextBlock[];
 };

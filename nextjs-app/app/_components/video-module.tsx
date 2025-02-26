@@ -21,14 +21,14 @@ export default function VideoModule({
   image,
   text
 }: TextModuleProps) {
-  if (_type != 'videoModule') return;
-
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHasWindow(true);
     }
   }, []);
+
+  if (_type != 'videoModule') return;
 
   let videosrc = "https://vimeo.com/" + video;
 

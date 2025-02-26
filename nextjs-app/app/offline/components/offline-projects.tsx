@@ -108,8 +108,8 @@ function ProjectRow({images, text}: ProjectRowProps) {
             const dimensions = ref ? ref.split('-')[2].split('x').map(Number) : [1200, 800];
             const [width, height] = dimensions;
             
-            return <div class="flex-1 relative"><Image
-                  key={index}
+            return <div key={index} className="flex-1 relative"><Image
+
                   className="w-full h-full object-cover"
                   image={image}
                 /></div>
