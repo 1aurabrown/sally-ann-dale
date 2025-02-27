@@ -12,7 +12,7 @@ export default function TextModule ({
 }: TextModuleProps) {
   if (_type != 'textModule') return
   return (
-    <section className="page-padding first:pt-10 first:md:pt-20 first:lg:pt-40">
+    <section className="w-full page-padding first:pt-10 first:md:pt-20 first:lg:pt-40">
       {body?.length && (
         <PortableText
           className="header text-24 leading-tight text-center md:text-36 lg:text-64"

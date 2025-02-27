@@ -101,6 +101,7 @@ export type SliderModule = {
       };
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
+      caption?: string;
       _type: "image";
     };
     heading: string;
@@ -294,6 +295,7 @@ export type ComplexPortableText = Array<{
   };
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
+  caption?: string;
   _type: "image";
   _key: string;
 } | {
@@ -1616,6 +1618,7 @@ export type OnlineQueryResult = {
         };
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
+        caption?: string;
         _type: "image";
         width: number | null;
         height: number | null;
@@ -1795,6 +1798,7 @@ export type GetTextPageQueryResult = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    caption?: string;
     _type: "image";
     _key: string;
     markDefs: null;
