@@ -93,7 +93,13 @@ export const pageModules = `
     ...
   },
   _type == 'listModule' => {
-    ...
+    _type,
+    heading,
+    items[],
+    indent,
+    link {
+      ${link}
+    }
   },
   _type == 'heroModule' => {
     ...,

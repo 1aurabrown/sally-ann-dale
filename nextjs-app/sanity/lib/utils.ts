@@ -43,7 +43,7 @@ export function linkResolver(link: Link | undefined) {
   }
 
   switch (link.linkType) {
-    case "url":
+    case "href":
       return link.url || null;
     case "page":
       if (link?.page && link.page?.isHome === true) {

@@ -28,7 +28,7 @@
 
 @layer utilities {
   .page-padding {
-    @apply mx-auto;
+    @apply w-full mx-auto;
     padding-left: var(--page-padding);
     padding-right: var(--page-padding);
   }

@@ -20,7 +20,7 @@ export default {
       options: {
         list: [
           { title: 'Page', value: 'page' },
-          { title: 'URL', value: 'url' }
+          { title: 'URL', value: 'href' }
         ],
         initialValue: 'page',
         layout: 'radio',
@@ -39,7 +39,7 @@ export default {
         { type: 'textPage' },
       ],
       hidden: ({ parent }) => {
-        return parent.linkType !== 'page'
+        return parent?.linkType !== 'page'
       },
     },
     {
@@ -48,7 +48,7 @@ export default {
       type: 'url',
       description: 'enter an external URL',
       hidden: ({ parent }) => {
-        return parent.linkType !== 'url'
+        return !(parent?.linkType !== 'page')
       },
     },
   ],
