@@ -21,13 +21,7 @@ export default {
     {
       title: 'Left Link',
       name: 'linkLeft',
-      type: 'array',
-      validation: Rule => Rule.max(1),
-      of: [{
-        title: 'Link',
-        name: 'link',
-        type: 'link'
-      }]
+      type: 'link',
     },
     {
       title: 'Right Heading',
@@ -44,13 +38,7 @@ export default {
     {
       title: 'Right Link',
       name: 'linkRight',
-      type: 'array',
-      validation: Rule => Rule.max(1),
-      of: [{
-        title: 'Link',
-        name: 'link',
-        type: 'link'
-      }]
+      type: 'link',
     },
   ],
   preview: {

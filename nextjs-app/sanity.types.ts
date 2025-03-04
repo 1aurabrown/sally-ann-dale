@@ -1384,7 +1384,7 @@ export type LayoutQueryResult = {
   } | null;
 };
 // Variable: homeQuery
-// Query: *[_type == "homepage" && _id ==  "homepage" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...,    linkLeft[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    },    linkRight[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'videoModule' => {    _key,    _type,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },  },  _type == 'sliderModule' => {    ...,    items[] {      image {          ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,      },      heading,      body    }  }  }}
+// Query: *[_type == "homepage" && _id ==  "homepage" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...,    linkLeft[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    },    linkRight[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'videoModule' => {    _key,    _type,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    _type,    heading,    items[],    indent,    link {        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'heroModule' => {    ...,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },  },  _type == 'sliderModule' => {    ...,    items[] {      image {          ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,      },      heading,      body    }  }  }}
 export type HomeQueryResult = {
   _id: string;
   _type: "homepage";
@@ -1574,7 +1574,7 @@ export type HomeQueryResult = {
   isHome: false;
 } | null;
 // Variable: onlineQuery
-// Query: *[_type == "online" && _id ==  "online" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...,    linkLeft[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    },    linkRight[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'videoModule' => {    _key,    _type,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    ...  },  _type == 'heroModule' => {    ...,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },  },  _type == 'sliderModule' => {    ...,    items[] {      image {          ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,      },      heading,      body    }  }  }}
+// Query: *[_type == "online" && _id ==  "online" ][0]{  ...,  "isHome": _id==homepage,  modules[]{      _type == 'splitTextModule' => {    ...,    linkLeft[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    },    linkRight[]{        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'videoModule' => {    _key,    _type,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },    video,    text  },  _type == 'textModule' => {    ...  },  _type == 'listModule' => {    _type,    heading,    items[],    indent,    link {        ...,    page->{    "type": _type,    "title": title,    "slug": slug.current,    "isHome": _id==homepage,  }    }  },  _type == 'heroModule' => {    ...,    image {        ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,    },  },  _type == 'sliderModule' => {    ...,    items[] {      image {          ...,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height,  "aspectRatio": asset->metadata.dimensions.aspectRatio,      },      heading,      body    }  }  }}
 export type OnlineQueryResult = {
   _id: string;
   _type: "online";
@@ -1584,26 +1584,6 @@ export type OnlineQueryResult = {
   title?: string;
   slug?: Slug;
   modules: Array<{
-    _key: string;
-    _type: "listModule";
-    heading: string;
-    items: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  } | {
     _key: string;
     _type: "sliderModule";
     items: Array<{
@@ -1692,6 +1672,27 @@ export type OnlineQueryResult = {
       _type: "block";
       _key: string;
     }> | null;
+  } | {
+    _type: "listModule";
+    heading: string;
+    items: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    indent: null;
+    link: null;
   }> | null;
   seo?: Seo;
   isHome: false;
@@ -1835,8 +1836,8 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_id == \"site\"][0]{\n  ...,\n  title,\n  URL,\n  gtmID,\n  seo{\n    \n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n\n  }\n}": SettingsQueryResult;
     "{\n  \"header\": *[_id == \"headerSettings\"][0]{\n    \n  ...,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  },\n  logo\n\n  },\n  \"footer\": *[_id == \"footerSettings\"][0]{\n    \n  logo,\n  heading,\n  email,\n  items,\n  nav[]{\n    \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n  }\n\n  }\n}": LayoutQueryResult;
-    "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...,\n    linkLeft[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    },\n    linkRight[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image {\n        \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n      },\n      heading,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
-    "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...,\n    linkLeft[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    },\n    linkRight[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    ...\n  },\n  _type == 'heroModule' => {\n    ...,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image {\n        \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n      },\n      heading,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
+    "*[_type == \"homepage\" && _id ==  \"homepage\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...,\n    linkLeft[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    },\n    linkRight[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    _type,\n    heading,\n    items[],\n    indent,\n    link {\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'heroModule' => {\n    ...,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image {\n        \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n      },\n      heading,\n      body\n    }\n  }\n\n  }\n}": HomeQueryResult;
+    "*[_type == \"online\" && _id ==  \"online\" ][0]{\n  ...,\n  \"isHome\": _id==homepage,\n  modules[]{\n    \n  _type == 'splitTextModule' => {\n    ...,\n    linkLeft[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    },\n    linkRight[]{\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'videoModule' => {\n    _key,\n    _type,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n    video,\n    text\n  },\n  _type == 'textModule' => {\n    ...\n  },\n  _type == 'listModule' => {\n    _type,\n    heading,\n    items[],\n    indent,\n    link {\n      \n  ...,\n  \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n\n    }\n  },\n  _type == 'heroModule' => {\n    ...,\n    image {\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    },\n  },\n  _type == 'sliderModule' => {\n    ...,\n    items[] {\n      image {\n        \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n      },\n      heading,\n      body\n    }\n  }\n\n  }\n}": OnlineQueryResult;
     "*[_type == \"offline\" && _id ==  \"offline\" ][0]{\n  ...,\n  projects[]->{\n    \n  _type,\n  _id,\n  slug,\n  title,\n  year,\n  rows[]{\n    _key,\n    text,\n    images[]{\n      \n  ...,\n  \"width\": asset->metadata.dimensions.width,\n  \"height\": asset->metadata.dimensions.height,\n  \"aspectRatio\": asset->metadata.dimensions.aspectRatio,\n    }\n  }\n\n  }\n}": OfflineQueryResult;
     "\n  *[_type == \"textPage\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \"slug\": slug.current\n  }\n": AllTextPagesQueryResult;
     "\n  *[_type == \"textPage\" && slug.current == $slug] [0] {\n    _id,\n    _type,\n    title,\n    slug,\n    body[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  page->{\n    \"type\": _type,\n    \"title\": title,\n    \"slug\": slug.current,\n    \"isHome\": _id==homepage,\n  }\n\n      }\n    },\n    seo{\n  ...,\n  metaTitle,\n  metaDesc,\n  shareTitle,\n  shareDesc,\n  shareGraphic\n}\n  }\n": GetTextPageQueryResult;

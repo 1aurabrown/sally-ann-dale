@@ -471,6 +471,21 @@
             }
           },
           "optional": false
+        },
+        "indent": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "link"
+          },
+          "optional": true
         }
       }
     }
@@ -543,6 +558,13 @@
                         "value": {
                           "type": "inline",
                           "name": "sanity.imageCrop"
+                        },
+                        "optional": true
+                      },
+                      "caption": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string"
                         },
                         "optional": true
                       },
@@ -1916,6 +1938,13 @@
                 },
                 "optional": true
               },
+              "caption": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {
@@ -2112,7 +2141,7 @@
               },
               {
                 "type": "string",
-                "value": "url"
+                "value": "href"
               }
             ]
           },
@@ -2685,7 +2714,7 @@
           "type": "inline",
           "name": "slug"
         },
-        "optional": true
+        "optional": false
       },
       "body": {
         "type": "objectAttribute",

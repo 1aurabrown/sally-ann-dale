@@ -1,16 +1,12 @@
-"use client";
 
 import Image from "@/app/_components/Image"
-import VimeoPlayer from '@u-wave/react-vimeo'
-
-import { useState, useEffect } from "react";
 
 import PortableText from "@/app/_components/PortableText";
 import { type PortableTextBlock } from "next-sanity";
 
 type TextModuleProps = {
   _type: string;
-  video: any;
+  video: string;
   image: any;
   text: PortableTextBlock[];
 };
@@ -21,27 +17,15 @@ export default function VideoModule({
   image,
   text
 }: TextModuleProps) {
-  const [hasWindow, setHasWindow] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
 
   if (_type != 'videoModule') return;
 
-  let videosrc = "https://vimeo.com/" + video;
 
+  const content = { __html: video }
   return (
     <section>
-      {(hasWindow && video) &&
-        <VimeoPlayer
-          video={video}
-          responsive={true}
-          showByline={false}
-          showTitle={false}
-          showPortrait={false}
-        />
+      {video &&
+        <div dangerouslySetInnerHTML={content}></div>
       }
 
       {text?.length && (

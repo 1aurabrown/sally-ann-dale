@@ -73,10 +73,10 @@ export const header=`
 export const pageModules = `
   _type == 'splitTextModule' => {
     ...,
-    linkLeft[]{
+    linkLeft{
       ${link}
     },
-    linkRight[]{
+    linkRight{
       ${link}
     }
   },

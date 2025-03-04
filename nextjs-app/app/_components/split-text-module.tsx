@@ -33,7 +33,7 @@ export default function SplitTextModule ({
               value={bodyLeft as PortableTextBlock[]}
             />
           )}
-          {linkLeft?.length && <ResolvedLink className='absolute inset-0 z-10' link={linkLeft[0]} title={linkLeft[0].title || linkLeft[0].page?.title}></ResolvedLink> }
+          {linkLeft && <ResolvedLink className='absolute inset-0 z-10' link={linkLeft} title={linkLeft.title || linkLeft.page?.title}></ResolvedLink> }
 
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function SplitTextModule ({
               value={bodyRight as PortableTextBlock[]}
             />
           )}
-          {linkRight?.length && <ResolvedLink className='absolute inset-0 z-10' link={linkRight[0]} title={linkRight[0].title || linkRight[0].page?.title}></ResolvedLink> }
+          {linkRight && <ResolvedLink className='absolute inset-0 z-10' link={linkRight} title={linkRight.title || linkRight.page?.title}></ResolvedLink> }
 
         </div>
       </div>
