@@ -167,9 +167,7 @@ export type SplitTextModule = {
     _type: "block";
     _key: string;
   }>;
-  linkLeft?: Array<{
-    _key: string;
-  } & Link>;
+  linkLeft?: Link;
   headingRight: string;
   bodyRight: Array<{
     children?: Array<{
@@ -187,9 +185,7 @@ export type SplitTextModule = {
     _type: "block";
     _key: string;
   }>;
-  linkRight?: Array<{
-    _key: string;
-  } & Link>;
+  linkRight?: Link;
 };
 
 export type VideoModule = {
@@ -1466,7 +1462,33 @@ export type HomeQueryResult = {
       _type: "block";
       _key: string;
     }>;
-    linkLeft: null;
+    linkLeft: {
+      _type: "link";
+      title?: string;
+      linkType: "href" | "page";
+      page: {
+        type: "textPage";
+        title: string | null;
+        slug: string;
+        isHome: false;
+      } | {
+        type: "homepage";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "offline";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "online";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | null;
+      url?: string;
+    } | null;
     headingRight: string;
     bodyRight: Array<{
       children?: Array<{
@@ -1484,7 +1506,33 @@ export type HomeQueryResult = {
       _type: "block";
       _key: string;
     }>;
-    linkRight: null;
+    linkRight: {
+      _type: "link";
+      title?: string;
+      linkType: "href" | "page";
+      page: {
+        type: "textPage";
+        title: string | null;
+        slug: string;
+        isHome: false;
+      } | {
+        type: "homepage";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "offline";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | {
+        type: "online";
+        title: string | null;
+        slug: string | null;
+        isHome: false;
+      } | null;
+      url?: string;
+    } | null;
   } | {
     _key: string;
     _type: "videoModule";
