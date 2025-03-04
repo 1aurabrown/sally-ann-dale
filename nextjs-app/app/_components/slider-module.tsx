@@ -1,18 +1,18 @@
 'use client'
 
-import { useState } from 'react';
-import Image from "@/app/_components/Image";
-import { type PortableTextBlock } from "next-sanity";
-import PortableText from "@/app/_components/PortableText";
+import { useState, useRef, useEffect } from 'react';
+import Image from '@/app/_components/Image';
+import { type PortableTextBlock } from 'next-sanity';
+import PortableText from '@/app/_components/PortableText';
 import { motion, AnimatePresence } from 'framer-motion';
 import VimeoPlayer from '@u-wave/react-vimeo'
 
-import React from "react";
-import Slider from "react-slick";
+import React from 'react';
+import Slider from 'react-slick';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./slider-module.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import styles from './slider-module.module.css';
 
 type SliderModuleProps = {
   _type: string;
@@ -34,6 +34,32 @@ export default function SliderModule({
     loading: false
   });
 
+  const [bottomPadding, setBottomPadding] = useState(0);
+
+  const textRef=useRef<HTMLInputElement>(null)
+
+  const updateBottomPadding = () => {
+    setBottomPadding(textRef?.current?.clientHeight)
+  }
+
+  useEffect(() => {
+    updateBottomPadding()
+  }, [slideData])
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      updateBottomPadding()
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  });
+
+
   if (_type != 'sliderModule') return;
   
   var settings = {
@@ -45,6 +71,7 @@ export default function SliderModule({
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: '25%',
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1280,
@@ -83,37 +110,26 @@ export default function SliderModule({
     },
   };
 
+  const style = { '--slider-module-padding-bottom': bottomPadding + 'px' } as React.CSSProperties
   return (
-    <section className="w-full max-w-full">
+    <section className={"w-full max-w-full " + styles.sliderModule } style={ style }>
       <div className="slider-container">
         <Slider {...settings}>
           {items.map(({ video, image, heading, body }, index) => {
             const isCurrent = index == slideData.current
             return (
-              <div className="border-black border flex items-center justify-center" key={index} >
+              <div className="flex items-center justify-center" key={index} >
                 {image && <Image className="w=full" image={image} />}
 
                   <div className="relative">
-                    <AnimatePresence initial={false}>
-                      {isCurrent && (<motion.div
-                        className='absolute left-0'
-                        initial="collapsed"
-                        animate="open"
-                        exit="collapsed"
-                        variants={{
-                          open: { opacity: 1, height: 'auto' },
-                          collapsed: { opacity: 0, height: 0 }
-                        }}
-                        transition={{ duration: 1, ease: "easeInOut" }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        {heading && <h2 className="header text-24 md:text-36 lg:text-48">{heading}</h2>}
-                        {body && <PortableText
-                          value={body as PortableTextBlock[]}
-                        />}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      <div className={ 'left-0 right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'absolute opacity-0') }>
+                        <div ref={isCurrent ? textRef : null} >
+                          {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
+                          {body && <PortableText
+                            value={body as PortableTextBlock[]}
+                          />}
+                        </div>
+                      </div>
 
                 </div>
               </div>
