@@ -1,10 +1,9 @@
-
 import Image from "@/app/_components/Image"
 
 import PortableText from "@/app/_components/PortableText";
 import { type PortableTextBlock } from "next-sanity";
 
-type TextModuleProps = {
+type VideoModuleProps = {
   _type: string;
   video: string;
   image: any;
@@ -16,10 +15,9 @@ export default function VideoModule({
   video,
   image,
   text
-}: TextModuleProps) {
+}: VideoModuleProps) {
 
   if (_type != 'videoModule') return;
-
 
   const content = { __html: video }
   return (
