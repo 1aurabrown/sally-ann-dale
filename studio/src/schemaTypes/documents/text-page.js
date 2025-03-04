@@ -22,6 +22,7 @@ export default {
       title: 'URL Slug',
       name: 'slug',
       type: 'slug',
+      validation: Rule => Rule.required(),
       description: '(required)',
       options: {
         source: 'title',

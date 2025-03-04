@@ -5,7 +5,6 @@ import Image from '@/app/_components/Image';
 import { type PortableTextBlock } from 'next-sanity';
 import PortableText from '@/app/_components/PortableText';
 import { motion, AnimatePresence } from 'framer-motion';
-import VimeoPlayer from '@u-wave/react-vimeo'
 
 import React from 'react';
 import Slider from 'react-slick';

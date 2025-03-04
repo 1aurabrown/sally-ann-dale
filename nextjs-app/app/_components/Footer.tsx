@@ -29,7 +29,7 @@ export function Footer({
       <div className="text-white">
         <div className="page-padding">
           <h5 className="pt-12">{heading}</h5>
-          <ul className="my-12 space-y-4">
+          <ul className="my-12 leading-tight">
             {items?.length && items.map((item, i) => {
               const isOpen = i === openIndex;
               return(
@@ -46,14 +46,15 @@ export function Footer({
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
+                        className="font-sans text-14 md:text-16"
                         variants={{
                           open: { opacity: 1, height: "auto" },
                           collapsed: { opacity: 0, height: 0 }
                         }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
                         style={{ overflow: 'hidden' }}
                       >
-                        <p className="font-sans text-14 md:text-16 mt-2">{item.description}</p>
+                        <p className="pt-1 md:pt-2 pb-2 md:pb-5 lg:text-19">{item.description}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
