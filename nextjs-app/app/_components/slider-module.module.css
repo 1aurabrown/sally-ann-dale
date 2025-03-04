@@ -1,34 +1,22 @@
 .sliderModule {
 	--arrow-offset: 25%;
-	@screen sm {
+}
 
-	}
-	@screen md {
-
-	}
-
-	@screen lg {
-
-	}
-
-	@screen xl {
-
-	}
-		:global(.slick-slide) {
+.sliderModule	:global(.slick-slide) {
 			transform: scale(.5);
 			transition: transform 200ms ease-out;
 		}
 
-		:global(.slick-slide.slick-center) {
+.sliderModule	:global(.slick-slide.slick-center) {
 			transform: scale(1);
 			transition: transform 200ms ease-in;
 		}
 
-		:global(.slick-list){
+.sliderModule	:global(.slick-list){
 			@apply duration-200 transition-all mb-4;
 		}
 
-		:global(.slick-arrow){
+.sliderModule	:global(.slick-arrow){
 			@apply w-1/4 transform-none top-0 z-10 transition-all duration-200;
 			height: auto;
 			bottom: var(--slider-module-padding-bottom);
@@ -37,25 +25,25 @@
 			}
 		}
 
-		:global(.slick-arrow){
+.sliderModule	:global(.slick-arrow){
 			&:before {
 				@apply opacity-0 transition-opacity duration-200;
 			}
 		}
 
-		:global(.slick-arrow){
+.sliderModule	:global(.slick-arrow){
 			&:hover:before {
 				@apply opacity-100;
 			}
 		}
 
-		:global(.slick-arrow){
+.sliderModule	:global(.slick-arrow){
 			&:focus-visible:before {
 				@apply outline outline-1  outline-black;
 			}
 		}
 
-		:global(.slick-next){
+.sliderModule	:global(.slick-next){
 			@apply right-0;
 			&:before {
 				@apply -translate-x-1/2 -translate-y-1/2;
@@ -64,7 +52,7 @@
 		}
 
 
-		:global(.slick-prev){
+.sliderModule	:global(.slick-prev){
 			@apply left-0;
 			&:before {
 				@apply translate-x-1/2 -translate-y-1/2;
@@ -72,8 +60,7 @@
 			}
 		}
 
-		:global(.slick-dots){
+.sliderModule	:global(.slick-dots){
 			@apply -bottom-10;
 		}
 
-}

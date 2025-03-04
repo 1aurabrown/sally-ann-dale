@@ -36,16 +36,20 @@ export default function SliderModule({
 
   const [bottomPadding, setBottomPadding] = useState(0);
 
-  const textsRef=(useRef([null]))
+  const textRef=useRef<HTMLInputElement>(null)
+
+  const updateBottomPadding = () => {
+    setBottomPadding(textRef?.current?.clientHeight)
+  }
 
   useEffect(() => {
-    setBottomPadding(textsRef?.current[slideData.current]?.clientHeight)
+    updateBottomPadding()
   }, [slideData])
 
 
   useEffect(() => {
     const handleResize = () => {
-      setBottomPadding(textsRef?.current[slideData.current]?.clientHeight)
+      updateBottomPadding()
     };
 
     window.addEventListener('resize', handleResize);
@@ -106,8 +110,9 @@ export default function SliderModule({
     },
   };
 
+  const style = { '--slider-module-padding-bottom': bottomPadding + 'px' } as React.CSSProperties
   return (
-    <section className={"w-full max-w-full " + styles.sliderModule } style={{ '--slider-module-padding-bottom': bottomPadding + 'px' }}>
+    <section className={"w-full max-w-full " + styles.sliderModule } style={ style }>
       <div className="slider-container">
         <Slider {...settings}>
           {items.map(({ video, image, heading, body }, index) => {
@@ -118,7 +123,7 @@ export default function SliderModule({
 
                   <div className="relative">
                       <div className={ 'left-0 right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'absolute opacity-0') }>
-                        <div ref={el => textsRef.current[index] = el} >
+                        <div ref={isCurrent ? textRef : null} >
                           {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
                           {body && <PortableText
                             value={body as PortableTextBlock[]}
