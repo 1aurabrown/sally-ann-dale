@@ -27,7 +27,7 @@ export default function CustomPortableText({
   const components: PortableTextComponents = {
     marks: {
       link: ({ children, value: link }) => {
-        return <ResolvedLink link={link}>{children}</ResolvedLink>;
+        return <ResolvedLink className='underline' link={link}>{children}</ResolvedLink>;
       },
     },
   };
