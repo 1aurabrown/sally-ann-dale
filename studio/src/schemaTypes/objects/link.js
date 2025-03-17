@@ -50,6 +50,9 @@ export default {
       hidden: ({ parent }) => {
         return !(parent?.linkType !== 'page')
       },
+      validation: Rule => Rule.uri({
+        scheme: ['http', 'https', 'mailto', 'tel']
+      }),
     },
   ],
   preview: {
