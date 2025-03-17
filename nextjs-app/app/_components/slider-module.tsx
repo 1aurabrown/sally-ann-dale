@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from '@/app/_components/Image';
-import Vimeo from '@u-wave/react-vimeo';
+import VimeoPlayer from '@/app/_components/vimeo-player'
 import { type PortableTextBlock } from 'next-sanity';
 import PortableText from '@/app/_components/PortableText';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -120,33 +120,51 @@ export default function SliderModule({
         {items.map(({ video, image, heading, body }, index) => {
           const isCurrent = index == slideData.current;
           return(
-            <div key={index} className={styles.slideContent} >
-              {video?.length &&
-                <Vimeo
-                  video={video}
-                  responsive={true}
-                  paused={() => {true}}
-                  style={{backgroundImage: (image ? `url(${urlForImage(image)?.auto("format").url()})` : '')}}
-                />
-              }
-              { !(video?.length) && image &&
-                <Image className="w=full" image={image} />
-              }
-
-              <div className="relative w-full">
-                <div className={ 'left-0 w-full right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'opacity-0') }>
-                  <div ref={isCurrent ? textRef : null}>
-                    {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
-                    {body && <PortableText
-                      value={body as PortableTextBlock[]}
-                    />}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Slide key={index} {...{video, image, heading, body, isCurrent, textRef}}/>
           )
         })}
       </Slider>
     </div>
   </section>);
+}
+
+function Slide ({
+  image,
+  video,
+  heading,
+  body,
+  isCurrent,
+  textRef
+}: {
+    image?: any;
+    video?: string;
+    heading: string;
+    body: PortableTextBlock[];
+    textRef?: any;
+    isCurrent?: boolean;
+  }) {
+
+  return (<div className={styles.slideContent} >
+    {video?.length &&
+      <VimeoPlayer
+        video={video}
+        paused={(isCurrent ? 1 : true) as boolean} // Use two different 'true' values to trigger re-evaluation of prop
+        style={{backgroundImage: (image ? `url(${urlForImage(image)?.auto("format").url()})` : '')}}
+      />
+    }
+    { !(video?.length) && image &&
+      <Image className="w=full" image={image} />
+    }
+
+    <div className="relative w-full">
+      <div className={ 'left-0 w-full right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'opacity-0') }>
+        <div ref={isCurrent ? textRef : null}>
+          {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
+          {body && <PortableText
+            value={body as PortableTextBlock[]}
+          />}
+        </div>
+      </div>
+    </div>
+  </div>)
 }

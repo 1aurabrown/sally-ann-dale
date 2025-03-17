@@ -1,12 +1,12 @@
-import Image from '@/app/_components/Image';
-import Vimeo from '@u-wave/react-vimeo';
+import Image from "@/app/_components/Image"
+import VimeoPlayer from '@/app/_components/vimeo-player'
 
 import PortableText from "@/app/_components/PortableText";
 import { type PortableTextBlock } from "next-sanity";
 
 type VideoModuleProps = {
   _type: string;
-  video: string;
+  video: any;
   image: any;
   text: PortableTextBlock[];
 };
@@ -20,13 +20,14 @@ export default function VideoModule({
 
   if (_type != 'videoModule') return;
 
+  let videosrc = "https://vimeo.com/" + video;
+
   return (
-    <section>
+    <section className="w-full">
       {video?.length &&
-        <Vimeo
+        <VimeoPlayer
+          className='w-full'
           video={video}
-          responsive={true}
-          style={{backgroundImage: (image ? `url(${urlForImage(image)?.auto("format").url()})` : '')}}
         />
       }
 

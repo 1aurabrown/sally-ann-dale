@@ -35,9 +35,9 @@
 }
 
 .sliderModule	:global(.slick-arrow){
-	@apply w-1/4 transform-none top-0 z-10 transition-all duration-200;
+	@apply w-1/4 transform-none top-0 bottom-0 z-10 transition-all duration-200;
 	height: auto;
-	bottom: calc(var(--slider-module-padding-bottom) / 2);
+	bottom: var(--slider-module-padding-bottom);
 	&:before {
 		@apply p-4 font-sans text-green absolute text-36 top-1/2;
 	}
