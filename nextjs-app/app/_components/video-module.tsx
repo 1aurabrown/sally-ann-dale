@@ -1,4 +1,5 @@
-import Image from "@/app/_components/Image"
+import Image from '@/app/_components/Image';
+import Vimeo from '@u-wave/react-vimeo';
 
 import PortableText from "@/app/_components/PortableText";
 import { type PortableTextBlock } from "next-sanity";
@@ -19,11 +20,14 @@ export default function VideoModule({
 
   if (_type != 'videoModule') return;
 
-  const content = { __html: video }
   return (
     <section>
-      {video &&
-        <div dangerouslySetInnerHTML={content}></div>
+      {video?.length &&
+        <Vimeo
+          video={video}
+          responsive={true}
+          style={{backgroundImage: (image ? `url(${urlForImage(image)?.auto("format").url()})` : '')}}
+        />
       }
 
       {text?.length && (

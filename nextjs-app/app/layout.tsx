@@ -95,7 +95,7 @@ export default async function RootLayout({
           )}
           <SanityLive onError={handleError} />
           <Header {...layout.header as HeaderProps} />
-          <main className="max-w-screen-2xl mx-auto">{children}</main>
+          <main>{children}</main>
           <Footer {...layout.footer as FooterProps}/>
         </section>
         <SpeedInsights />

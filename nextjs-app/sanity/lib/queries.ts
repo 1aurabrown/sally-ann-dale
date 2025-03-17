@@ -72,7 +72,12 @@ export const header=`
 // Construct our content "modules" GROQ
 export const pageModules = `
   _type == 'splitTextModule' => {
-    ...,
+    _key,
+    _type,
+    headingLeft,
+    bodyLeft,
+    headingRight,
+    bodyRight,
     linkLeft{
       ${link}
     },
@@ -93,6 +98,7 @@ export const pageModules = `
     ...
   },
   _type == 'listModule' => {
+    _key,
     _type,
     heading,
     items[],
@@ -102,17 +108,22 @@ export const pageModules = `
     }
   },
   _type == 'heroModule' => {
-    ...,
+    _key,
+    _type,
     image {
       ${image}
     },
   },
   _type == 'sliderModule' => {
-    ...,
+    _key,
+    _type,
     items[] {
+      slideType,
       image {
         ${image}
       },
+      video,
+      caption,
       heading,
       body
     }
