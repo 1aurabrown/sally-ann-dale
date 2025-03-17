@@ -16,7 +16,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your blog.',
+      description: 'This field is the title of your website.',
       title: 'Title',
       type: 'string',
       initialValue: demo.title,
@@ -24,7 +24,7 @@ export default defineType({
     }),
     defineField({
       name: 'description',
-      description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
+      description: 'Used for the <meta> description tag for SEO.',
       title: 'Description',
       type: 'array',
       initialValue: demo.description,
