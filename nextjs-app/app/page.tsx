@@ -8,6 +8,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
 
+
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
@@ -47,7 +48,7 @@ export default async function homepagePage(props: Props) {
 
   return (
     <>
-      <article className="max-w-full overflow-hidden flex flex-col justify-stretch space-y-15 md:space-30 xl:space-y-55 mb-10 md:mb-30 ">
+      <article className="max-w-full flex flex-col justify-stretch space-y-15 md:space-30 xl:space-y-55 mb-10 md:mb-30 ">
         <Modules modules={homepage.modules} />
       </article>
     </>

@@ -20,7 +20,7 @@ export default function ListModule ({
 
 
   return (
-    <section className="page-padding">
+    <section className="max-w-screen-2xl mx-auto page-padding">
       <h3 className="header text-36 md:text-48 lg:text-64">{heading}</h3>
 
       { items.length && (

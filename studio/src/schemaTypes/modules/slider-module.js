@@ -11,7 +11,7 @@ export default {
       name: 'items',
       type: 'array',
       of: [{
-        title: 'SliderItem',
+        title: 'Slide',
         name: 'sliderItem',
         type: 'object',
         icon: Image,
@@ -20,12 +20,17 @@ export default {
             title: 'Image',
             name: 'image',
             type: 'image',
-            fields: [{
-              title: 'Caption',
-              type: 'string',
-              name: 'caption'
-            }],
-            validation: Rule => Rule.required(),
+          },
+          {
+            title: 'Video',
+            name: 'video',
+            type: 'string',
+            description: 'Provide a Vimeo video ID',
+          },
+          {
+            title: 'Media Caption',
+            name: 'caption',
+            type: 'string',
           },
           {
             title: 'Heading',

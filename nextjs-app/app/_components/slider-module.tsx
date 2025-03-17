@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from '@/app/_components/Image';
+import VimeoPlayer from '@/app/_components/vimeo-player'
 import { type PortableTextBlock } from 'next-sanity';
 import PortableText from '@/app/_components/PortableText';
 import { motion, AnimatePresence } from 'framer-motion';
+import { urlForImage } from "@/sanity/lib/utils";
 
 import React from 'react';
 import Slider from 'react-slick';
@@ -12,6 +14,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './slider-module.module.css';
+
 
 type SliderModuleProps = {
   _type: string;
@@ -25,7 +28,7 @@ type SliderModuleProps = {
 
 export default function SliderModule({
   _type,
-  items
+  items,
 }: SliderModuleProps) {
   const [slideData, setSlideData] = useState({
     current: 0,
@@ -60,7 +63,7 @@ export default function SliderModule({
 
 
   if (_type != 'sliderModule') return;
-  
+
   var settings = {
     className: "max-w-full",
     dots: true,
@@ -109,34 +112,59 @@ export default function SliderModule({
     },
   };
 
+
   const style = { '--slider-module-padding-bottom': bottomPadding + 'px' } as React.CSSProperties
-  return (
-    <section className={"w-full max-w-full " + styles.sliderModule } style={ style }>
-      <div className="slider-container">
-        <Slider {...settings}>
-          {items.map(({ video, image, heading, body }, index) => {
-            const isCurrent = index == slideData.current
-            return (
-              <div className="flex items-center justify-center" key={index} >
-                {image && <Image className="w=full" image={image} />}
+  return (<section className={"w-full max-w-full " + styles.sliderModule } style={ style }>
+    <div className="slider-container">
+      <Slider {...settings}>
+        {items.map(({ video, image, heading, body }, index) => {
+          const isCurrent = index == slideData.current;
+          return(
+            <Slide key={index} {...{video, image, heading, body, isCurrent, textRef}}/>
+          )
+        })}
+      </Slider>
+    </div>
+  </section>);
+}
 
-                  <div className="relative">
-                      <div className={ 'left-0 right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'absolute opacity-0') }>
-                        <div ref={isCurrent ? textRef : null} >
-                          {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
-                          {body && <PortableText
-                            value={body as PortableTextBlock[]}
-                          />}
-                        </div>
-                      </div>
+function Slide ({
+  image,
+  video,
+  heading,
+  body,
+  isCurrent,
+  textRef
+}: {
+    image?: any;
+    video?: string;
+    heading: string;
+    body: PortableTextBlock[];
+    textRef?: any;
+    isCurrent?: boolean;
+  }) {
 
-                </div>
-              </div>
-            )
+  return (<div className={styles.slideContent} >
+    {video?.length &&
+      <VimeoPlayer
+        video={video}
+        paused={(isCurrent ? 1 : true) as boolean} // Use two different 'true' values to trigger re-evaluation of prop
+        style={{backgroundImage: (image ? `url(${urlForImage(image)?.auto("format").url()})` : '')}}
+      />
+    }
+    { !(video?.length) && image &&
+      <Image className="w=full" image={image} />
+    }
 
-          })}
-        </Slider>
+    <div className="relative w-full">
+      <div className={ 'left-0 w-full right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'opacity-0') }>
+        <div ref={isCurrent ? textRef : null}>
+          {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
+          {body && <PortableText
+            value={body as PortableTextBlock[]}
+          />}
+        </div>
       </div>
-    </section>
-  );
+    </div>
+  </div>)
 }

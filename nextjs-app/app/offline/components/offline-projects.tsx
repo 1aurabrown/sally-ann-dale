@@ -118,7 +118,7 @@ function ProjectRow({images, text}: ProjectRowProps) {
         </div>
       
       {text?.length && (
-        <div className='mt-4 md:mt-0 md:pl-16'>
+        <div className='mt-4 md:mt-0 md:pl-16 max-w-xl'>
           <PortableText value={text as PortableTextBlock[]} />
         </div>
       )}

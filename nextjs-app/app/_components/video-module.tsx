@@ -1,11 +1,12 @@
 import Image from "@/app/_components/Image"
+import VimeoPlayer from '@/app/_components/vimeo-player'
 
 import PortableText from "@/app/_components/PortableText";
 import { type PortableTextBlock } from "next-sanity";
 
 type VideoModuleProps = {
   _type: string;
-  video: string;
+  video: any;
   image: any;
   text: PortableTextBlock[];
 };
@@ -19,11 +20,15 @@ export default function VideoModule({
 
   if (_type != 'videoModule') return;
 
-  const content = { __html: video }
+  let videosrc = "https://vimeo.com/" + video;
+
   return (
-    <section>
-      {video &&
-        <div dangerouslySetInnerHTML={content}></div>
+    <section className="w-full">
+      {video?.length &&
+        <VimeoPlayer
+          className='w-full'
+          video={video}
+        />
       }
 
       {text?.length && (
