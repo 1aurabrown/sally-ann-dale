@@ -10,7 +10,6 @@ export default {
       title: 'Placeholder Image',
       name: 'image',
       type: 'image',
-      validation: Rule => Rule.required(),
     },
     {
       title: 'Video',
