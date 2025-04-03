@@ -59,7 +59,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const louiseDisplay = localFont({
+const louizeDisplay = localFont({
   src: '../public/fonts/LouizeDisplay-Regular-205TF.woff2',  // Go up one level from app/ to reach nextjs-app/
   variable: '--font-serif'
 })
@@ -83,7 +83,7 @@ export default async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" className={`${circularFont.variable} ${louiseDisplay.variable} bg-white text-black`}>
+    <html lang="en" className={`${circularFont.variable} ${louizeDisplay.variable} bg-white text-black`}>
       <body>
         <section className="min-h-screen">
           <Toaster />

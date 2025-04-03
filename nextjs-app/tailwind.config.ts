@@ -73,6 +73,8 @@ export default {
       white: '#ffffff',
       green: '#33471F',
       black: '#000000',
+      grey: '#DDE0E3',
+      charcoal: '#222222'
     },
     fontFamily: {
       sans: ["var(--font-circular)", 'sans-serif'],
