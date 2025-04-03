@@ -70,7 +70,11 @@ export function Header({
       const scrollPercent = window.scrollY / window.innerHeight;
 
       // Before Start
-      if (scrollPercent <= startPercent) {
+      if (!isHomepage) {
+        setTranslateY(endY)
+        setScale(endScale)
+        setWhiteBackground(true)
+      } else if (scrollPercent <= startPercent) {
         setTranslateY(startY)
         setScale(startScale)
         setWhiteBackground(false)
@@ -96,8 +100,8 @@ export function Header({
     if (isHomepage) {
       window.addEventListener('resize', handleScroll);
       window.addEventListener('scroll', handleScroll);
-      handleScroll();
     }
+    handleScroll();
 
     return () => {
       window.removeEventListener('resize', handleScroll);
