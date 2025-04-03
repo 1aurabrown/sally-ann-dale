@@ -83,7 +83,7 @@ export default async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" className={`${circularFont.variable} ${louizeDisplay.variable} bg-white text-black`}>
+    <html lang="en" className={`${circularFont.variable} ${louizeDisplay.variable} bg-grey text-black`}>
       <body>
         <section className="min-h-screen">
           <Toaster />
