@@ -1,5 +1,6 @@
 'use client'
 
+import { X, List } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion";
 
 import ResolvedLink from './ResolvedLink'
@@ -49,7 +50,7 @@ export function Header({
       var startScale, startY;
       const viewWidth = window.innerWidth;
       if (viewWidth < 640 ) {
-        startScale = (viewWidth - 100)/ 118
+        startScale = (viewWidth - 50)/ 118
       } else if (viewWidth < 1280 ) {
         startScale = (viewWidth - 40)/ 118
       } else {
@@ -58,7 +59,7 @@ export function Header({
 
       if (viewWidth < 640 ) {
         setIsMobile(true)
-        startY = -8
+        startY = 20
       } else {
         setIsMobile(false)
         setMobileNavVisible(false)
@@ -115,14 +116,17 @@ export function Header({
 
   return (
       <header
-        className={'w-full h-header sticky px-6 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
+        className={'w-full h-header sticky px-thin sm:px-6 top-0 z-20 grid grid-tempate grid-cols-[1fr_auto_1fr] items-center transition-all duration-200' + (whiteBackground ? ' bg-white/95' : '')}
       >
 
-      {isMobile && <div className="z-50">
+      {isMobile && <div className="inline-block z-10 flex items-center">
         <button
-          className={`relative z-10${mobileNavVisible ? ' text-white' : ''}`}
+          className={`z-50 relative ${mobileNavVisible ? ' text-white' : ''}`}
           onClick={()=>setMobileNavVisible(!mobileNavVisible)}
-        >{mobileNavVisible ? '\u2715' : '\u2261'}</button>
+        >
+          {mobileNavVisible && <X size={24} weight="light" />}
+          {!mobileNavVisible && <List size={24} weight="light" />}
+        </button>
 
         <AnimatePresence>
          {(isMobile && mobileNavVisible) &&
@@ -140,7 +144,7 @@ export function Header({
             <nav className="">
               <ul
                 role="list"
-                className="font-serif text-white text-48 py-10 px-4"
+                className="font-serif text-white text-64 py-10 px-8 leading-tight"
               >
                 {nav.map(navItem => {
                   return(

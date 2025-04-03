@@ -110,6 +110,8 @@ export const pageModules = `
   _type == 'heroModule' => {
     _key,
     _type,
+    heading,
+    body,
     image {
       ${image}
     },
