@@ -47,7 +47,7 @@ export default async function OnlinePage(props: Props) {
 
   return (
     <>
-      <article className="max-w-full overflow-hidden flex flex-col justify-stretch space-y-15 md:space-30 xl:space-y-55 mb-10 md:mb-30 ">
+      <article className="max-w-full overflow-hidden flex flex-col justify-stretch space-y-15 md:space-30 xl:space-y-55 pb-10 md:pb-30 ">
         <Modules modules={online.modules} />
       </article>
     </>
