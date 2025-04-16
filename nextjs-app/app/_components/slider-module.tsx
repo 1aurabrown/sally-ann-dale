@@ -72,35 +72,35 @@ export default function SliderModule({
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: '25%',
-    adaptiveHeight: true,
+    centerPadding: '15%',
+    adaptiveHeight: false,
     responsive: [
       {
-        breakpoint: 1280,
+        breakpoint: 1279,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 1024,
+        breakpoint: 1023,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 768,
+        breakpoint: 767,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 640,
+        breakpoint: 639,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
         }
       },
     ],
@@ -156,8 +156,8 @@ function Slide ({
       <Image className="w=full" image={image} />
     }
 
-    <div className="relative w-full">
-      <div className={ 'left-0 w-full right-0 top-0 transition-opacity duration-500 ' + (isCurrent ? 'opacity-100' : 'opacity-0') }>
+    <div className="relative w-full relative">
+      <div className={ 'left-0 w-full right-0 top-0 transition-opacity duration-500 absolute ' + (isCurrent ? 'opacity-100' : 'opacity-0') }>
         <div ref={isCurrent ? textRef : null}>
           {heading && <h2 className="header pt-2 text-24 md:text-36 lg:text-48">{heading}</h2>}
           {body && <PortableText

@@ -33,7 +33,7 @@ export default function VimeoPlayer({
   return (
     (hasWindow && video) &&
       <ReactVimeoPlayer
-      	className={className}
+      	className={className + ' bg-green/25'}
       	style={style}
         video={video}
         responsive={true}
