@@ -21,7 +21,7 @@ export default function HeroModule({
   return (
     <section className="page-padding">
       {image && (
-        <Image className="w-full px-10 md:px-25 mx-auto max-w-4xl" image={image} />
+        <Image className="pt-[5%] w-full px-10 md:px-25 mx-auto max-w-4xl" image={image} />
       )}
       <div className="first:mt-[17vw] first:lg:mt-[30vh] md:flex md:gap-16 space-y-10 md:space-y-0 mt-12">
         {heading?.length && (

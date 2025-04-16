@@ -63,7 +63,7 @@ export function Header({
       } else {
         setIsMobile(false)
         setMobileNavVisible(false)
-        startY = startScale * 8
+        startY = 17
       }
 
 

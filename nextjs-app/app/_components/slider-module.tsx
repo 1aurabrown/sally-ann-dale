@@ -114,7 +114,7 @@ export default function SliderModule({
 
 
   const style = { '--slider-module-padding-bottom': bottomPadding + 'px' } as React.CSSProperties
-  return (<section className={"w-full max-w-full " + styles.sliderModule } style={ style }>
+  return (<section className={"w-full max-w-full first:mt-10 first:lg:mt-18 " + styles.sliderModule } style={ style }>
     <div className="slider-container">
       <Slider {...settings}>
         {items.map(({ video, image, heading, body }, index) => {
