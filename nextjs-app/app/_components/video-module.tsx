@@ -23,7 +23,7 @@ export default function VideoModule({
   let videosrc = "https://vimeo.com/" + video;
 
   return (
-    <section className="w-full">
+    <section className="w-full first:mt-10 first:lg:mt-18">
       {video?.length &&
         <VimeoPlayer
           className='w-full'
